@@ -1,0 +1,152 @@
+---
+title: A Long-Term Archival Pipeline for the Forschungsdatenplattform Stadt.Geschichte.Basel
+subtitle: DaSCHCon 2025
+author:
+  - Moritz Mähr
+  - Moritz Twente
+institute:
+  - Universität Basel
+  - Universität Bern
+date: 2025-10-15
+format:
+  revealjs:
+    theme: default
+    slide-number: true
+    chalkboard: true
+    preview-links: auto
+    logo: ../android-chrome-192x192.png
+    footer: "DaSCHCon 2025 | Mähr & Twente | omeka2dsp Pipeline"
+---
+
+## Introduction
+
+::: {.incremental}
+- The [Forschungsdatenplattform Stadt.Geschichte.Basel](https://forschung.stadtgeschichtebasel.ch)
+- Open access to historical materials (texts, images, statistical, geospatial data)
+- Current infrastructure: Omeka-S → CollectionBuilder-CSV → GitHub Pages
+- Problem: Sustainability and scalability challenges
+:::
+
+## Current Architecture
+
+```{mermaid}
+graph LR
+    A[Omeka-S<br/>University of Bern] -->|Export| B[CollectionBuilder<br/>CSV]
+    B -->|Deploy| C[GitHub Pages]
+    C -->|Public Access| D[Users]
+```
+
+## Critical Limitations
+
+::: {.incremental}
+1. **Institutional Control**: Omeka not under our control
+2. **Persistence**: GitHub Pages not suitable for large files
+3. **FAIR Compliance**: No versioning or persistent identifiers
+4. **Long-term Funding**: Infrastructure dependencies
+:::
+
+## The Solution: omeka2dsp Pipeline
+
+::: {.incremental}
+- Archive with DaSCH infrastructure
+- Versioned, durable, FAIR-compliant publication
+- Decoupled archival backend from presentation layer
+:::
+
+## New Architecture
+
+```{mermaid}
+graph LR
+    A[Omeka-S] -->|omeka2dsp<br/>Pipeline| B[DaSCH/DSP<br/>Archive]
+    B -->|Stable IDs| C[CollectionBuilder]
+    C -->|Deploy| D[GitHub Pages]
+    B -.->|Long-term<br/>Preservation| E[Users]
+    D -->|Public Access| E
+```
+
+## Pipeline Components
+
+::: {.incremental}
+1. **Metadata Harvesting**: Omeka → DaSCH data model
+2. **Automated Deposit**: REST API integration with versioning
+3. **Identifier Management**: Write back stable DaSCH identifiers
+4. **Relationship Preservation**: Hierarchies and media metadata
+:::
+
+## Technical Implementation
+
+### Metadata Transformation
+- Custom crosswalks from Omeka to DaSCH
+- Anti-discriminatory description practices
+- Preservation of hierarchical relationships
+
+### API Integration
+- DaSCH REST API for deposits and updates
+- Version control for existing records
+- Automated identifier writeback
+
+## Lessons Learned
+
+::: {.incremental}
+- **Metadata Crosswalks**: Complex mapping logic required
+- **Version Control**: Careful handling of updates and versions
+- **File Transfers**: Large file handling considerations
+- **Identifier Management**: Bidirectional synchronization
+:::
+
+## Challenges
+
+::: {.incremental}
+- Aligning minimal computing (CollectionBuilder) with robust backends (DSP)
+- Maintaining infrastructure independence
+- Scaling humanities platforms
+- Implementing FAIR principles in practice
+:::
+
+## Benefits
+
+::: {.incremental}
+- **Long-term Accessibility**: Institutional backing
+- **Citability**: Persistent identifiers
+- **Semantic Interoperability**: Standardized metadata
+- **Version Control**: Track changes over time
+- **Decoupling**: Independent presentation and archival layers
+:::
+
+## Broader Implications
+
+::: columns
+::: {.column width="50%"}
+### Questions Raised
+- Infrastructural independence
+- Platform scalability
+- FAIR principles in practice
+:::
+
+::: {.column width="50%"}
+### Community Impact
+- Lightweight publishing + robust infrastructure
+- Standards-based access
+- Community-developed ecosystems
+:::
+:::
+
+## Resources
+
+::: {.nonincremental}
+- [Forschungsdatenplattform](https://forschung.stadtgeschichtebasel.ch)
+- [omeka2dsp Documentation](https://dokumentation.stadtgeschichtebasel.ch/omeka2dsp)
+- [Stadt.Geschichte.Basel](https://stadtgeschichtebasel.ch)
+- [This Repository](https://github.com/maehr/daschcon2025-omeka2dsp)
+:::
+
+## Thank You!
+
+### Questions?
+
+::: {.nonincremental}
+**Contact:**
+
+- Moritz Mähr: [moritz.maehr@gmail.com](mailto:moritz.maehr@gmail.com)
+- Moritz Twente: [mtwente@protonmail.com](mailto:mtwente@protonmail.com)
+:::
