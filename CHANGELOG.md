@@ -17,10 +17,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Updated README.md with project-specific information
-- Configured _quarto.yml for presentation and abstract
+- Configured \_quarto.yml for presentation and abstract
 - Updated package.json with repository information
 
 ### Removed
 
 - Removed template folders (data, analysis, build, src, test, project-management, documentation)
-
