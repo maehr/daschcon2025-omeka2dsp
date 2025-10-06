@@ -7,7 +7,10 @@ This repository contains the abstract and presentation for our contribution to D
 [![GitHub issues](https://img.shields.io/github/issues/maehr/daschcon2025-omeka2dsp.svg)](https://github.com/maehr/daschcon2025-omeka2dsp/issues)
 [![GitHub forks](https://img.shields.io/github/forks/maehr/daschcon2025-omeka2dsp.svg)](https://github.com/maehr/daschcon2025-omeka2dsp/network)
 [![GitHub stars](https://img.shields.io/github/stars/maehr/daschcon2025-omeka2dsp.svg)](https://github.com/maehr/daschcon2025-omeka2dsp/stargazers)
-[![Code license](https://img.shields.io/github/license/maehr/daschcon2025-omeka2dsp.svg)](https://github.com/maehr/daschcon2025-omeka2dsp/blob/main/LICENSE-AGPL.md)
+[![Code license](https://img.shields.io/github/license/maehr/daschcon2025-omeka2dsp.svg)](LICENSE-AGPL.md)
+[![Data license](https://img.shields.io/badge/Data-CC_BY_4.0-green)](LICENSE-CCBY.md)
+
+<!-- [![DOI](https://zenodo.org/badge/1070836085.svg)](https://zenodo.org/badge/latestdoi/ZENODO_RECORD) -->
 
 ## Conference Information
 
@@ -101,6 +104,42 @@ Then run:
 ```bash
 npm install
 ```
+
+<!-- FIXME: Add DOI badge and link when Zenodo record is created
+
+## Citation
+
+These resources are openly available to everyone and can be used for any research or educational purpose. If you use these resources in your research, please cite as specified in `CITATION.cff`. The following citation formats are also available through _Zenodo_:
+
+- [BibTeX](https://zenodo.org/record/ZENODO_RECORD/export/hx)
+- [CSL](https://zenodo.org/record/ZENODO_RECORD/export/csl)
+- [DataCite](https://zenodo.org/record/ZENODO_RECORD/export/dcite4)
+- [Dublin Core](https://zenodo.org/record/ZENODO_RECORD/export/xd)
+- [DCAT](https://zenodo.org/record/ZENODO_RECORD/export/dcat)
+- [JSON](https://zenodo.org/record/ZENODO_RECORD/export/json)
+- [JSON-LD](https://zenodo.org/record/ZENODO_RECORD/export/schemaorg_jsonld)
+- [GeoJSON](https://zenodo.org/record/ZENODO_RECORD/export/geojson)
+- [MARCXML](https://zenodo.org/record/ZENODO_RECORD/export/xm)
+
+_Zenodo_ provides an [API (REST & OAI-PMH)](https://developers.zenodo.org/) to access the data. For example, the following command will return the metadata for the most recent version of the data
+
+```bash
+curl -i https://zenodo.org/api/records/ZENODO_RECORD
+```
+-->
+
+## Support
+
+This project is maintained by [@maehr](https://github.com/maehr). Please understand that we can't provide individual support via email. We also believe that help is much more valuable when it's shared publicly, so more people can benefit from it.
+
+| Type                                   | Platforms                                                                         |
+| -------------------------------------- | --------------------------------------------------------------------------------- |
+| 🚨 **Bug Reports**                     | [GitHub Issue Tracker](https://github.com/maehr/daschcon2025-omeka2dsp/issues)    |
+| 📊 **Report bad data**                 | [GitHub Issue Tracker](https://github.com/maehr/daschcon2025-omeka2dsp/issues)    |
+| 📚 **Docs Issue**                      | [GitHub Issue Tracker](https://github.com/maehr/daschcon2025-omeka2dsp/issues)    |
+| 🎁 **Feature Requests**                | [GitHub Issue Tracker](https://github.com/maehr/daschcon2025-omeka2dsp/issues)    |
+| 🛡 **Report a security vulnerability** | See [SECURITY.md](SECURITY.md)                                                    |
+| 💬 **General Questions**               | [GitHub Discussions](https://github.com/maehr/daschcon2025-omeka2dsp/discussions) |
 
 ## Roadmap
 
