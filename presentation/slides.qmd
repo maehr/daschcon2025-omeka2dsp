@@ -1,26 +1,43 @@
 ---
 title: A Long-Term Archival Pipeline for the Forschungsdatenplattform Stadt.Geschichte.Basel
-subtitle: DaSCHCon 2025
+subtitle: omeka2dsp
 author:
-  - Moritz Mähr
-  - Moritz Twente
-institute:
-  - Universität Basel
-  - Universität Bern
+  - name: "Moritz Mähr"
+    affiliation:
+    - "University of Basel"
+    - "University of Bern"
+    orcid: "0000-0002-1367-1618"
+    email: "moritz.maehr@gmail.com"
+  - name: "Moritz Twente"
+    affiliation: "University of Basel"
+    orcid: "0009-0005-7187-9774"
+    email: "mtwente@protonmail.com"
 date: 2025-10-15
+abstract: |
+  TBD
 format:
   revealjs:
-    theme: default
+    theme: simple
+    css: /styles.css
     slide-number: true
-    chalkboard: true
+    incremental: true
+    # transition: slide
+    code-line-numbers: true
+    embed-resources: true
+    menu:
+      side: right
+      width: normal
+    height: 900
+    width: 1600
     preview-links: auto
-    logo: ../android-chrome-192x192.png
-    footer: "DaSCHCon 2025 | Mähr & Twente | omeka2dsp Pipeline"
+  # pptx:
+  #   reference-doc: "SGB_PowerPoint_Vorlage.potx"
 ---
 
 ## Introduction
 
-::: {.incremental}
+::: incremental
+
 - The [Forschungsdatenplattform Stadt.Geschichte.Basel](https://forschung.stadtgeschichtebasel.ch)
 - Open access to historical materials (texts, images, statistical, geospatial data)
 - Current infrastructure: Omeka-S → CollectionBuilder-CSV → GitHub Pages
@@ -38,7 +55,8 @@ graph LR
 
 ## Critical Limitations
 
-::: {.incremental}
+::: incremental
+
 1. **Institutional Control**: Omeka not under our control
 2. **Persistence**: GitHub Pages not suitable for large files
 3. **FAIR Compliance**: No versioning or persistent identifiers
@@ -47,7 +65,8 @@ graph LR
 
 ## The Solution: omeka2dsp Pipeline
 
-::: {.incremental}
+::: incremental
+
 - Archive with DaSCH infrastructure
 - Versioned, durable, FAIR-compliant publication
 - Decoupled archival backend from presentation layer
@@ -66,7 +85,8 @@ graph LR
 
 ## Pipeline Components
 
-::: {.incremental}
+::: incremental
+
 1. **Metadata Harvesting**: Omeka → DaSCH data model
 2. **Automated Deposit**: REST API integration with versioning
 3. **Identifier Management**: Write back stable DaSCH identifiers
@@ -76,18 +96,21 @@ graph LR
 ## Technical Implementation
 
 ### Metadata Transformation
+
 - Custom crosswalks from Omeka to DaSCH
 - Anti-discriminatory description practices
 - Preservation of hierarchical relationships
 
 ### API Integration
+
 - DaSCH REST API for deposits and updates
 - Version control for existing records
 - Automated identifier writeback
 
 ## Lessons Learned
 
-::: {.incremental}
+::: incremental
+
 - **Metadata Crosswalks**: Complex mapping logic required
 - **Version Control**: Careful handling of updates and versions
 - **File Transfers**: Large file handling considerations
@@ -96,7 +119,8 @@ graph LR
 
 ## Challenges
 
-::: {.incremental}
+::: incremental
+
 - Aligning minimal computing (CollectionBuilder) with robust backends (DSP)
 - Maintaining infrastructure independence
 - Scaling humanities platforms
@@ -105,7 +129,8 @@ graph LR
 
 ## Benefits
 
-::: {.incremental}
+::: incremental
+
 - **Long-term Accessibility**: Institutional backing
 - **Citability**: Persistent identifiers
 - **Semantic Interoperability**: Standardized metadata
@@ -115,38 +140,43 @@ graph LR
 
 ## Broader Implications
 
-::: columns
+::::: columns
 ::: {.column width="50%"}
+
 ### Questions Raised
+
 - Infrastructural independence
 - Platform scalability
 - FAIR principles in practice
 :::
 
 ::: {.column width="50%"}
+
 ### Community Impact
+
 - Lightweight publishing + robust infrastructure
 - Standards-based access
 - Community-developed ecosystems
 :::
-:::
+:::::
 
 ## Resources
 
-::: {.nonincremental}
+::: nonincremental
+
 - [Forschungsdatenplattform](https://forschung.stadtgeschichtebasel.ch)
 - [omeka2dsp Documentation](https://dokumentation.stadtgeschichtebasel.ch/omeka2dsp)
 - [Stadt.Geschichte.Basel](https://stadtgeschichtebasel.ch)
 - [This Repository](https://github.com/maehr/daschcon2025-omeka2dsp)
 :::
 
-## Thank You!
+## Thank You
 
 ### Questions?
 
-::: {.nonincremental}
+::: nonincremental
 **Contact:**
 
-- Moritz Mähr: [moritz.maehr@gmail.com](mailto:moritz.maehr@gmail.com)
-- Moritz Twente: [mtwente@protonmail.com](mailto:mtwente@protonmail.com)
+- Moritz Mähr: [moritz.maehr\@gmail.com](mailto:moritz.maehr@gmail.com)
+- Moritz Twente: [mtwente\@protonmail.com](mailto:mtwente@protonmail.com)
 :::

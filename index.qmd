@@ -23,8 +23,8 @@ This repository contains the abstract and presentation for the DaSCHCon 2025 con
 
 ## Contents
 
-- [Abstract](abstract/abstract.qmd) - Full conference abstract
-- [Presentation](presentation/presentation.qmd) - Quarto RevealJS presentation slides
+- [Abstract](abstract/index.qmd) - Full conference abstract
+- [Presentation](presentation/index.qmd) - Quarto RevealJS presentation slides
 
 ## Related Links
 

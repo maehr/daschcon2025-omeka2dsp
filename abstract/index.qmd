@@ -41,21 +41,21 @@ The [Forschungsdatenplattform](https://forschung.stadtgeschichtebasel.ch) by Sta
 
 At present, metadata and files are curated and managed using the [Omeka-S instance provided by the University of Bern](https://omeka.unibe.ch/), from which we extract the data for display via CollectionBuilder. However, this setup introduces significant risks for long-term availability:
 
-- Omeka is not under our institutional control and may not remain permanently funded.
-- GitHub Pages is not suitable for serving large files or guaranteeing persistence.
-- CollectionBuilder lacks built-in support for versioning and persistent identifiers at the level required by research data infrastructures.
+-   Omeka is not under our institutional control and may not remain permanently funded.
+-   GitHub Pages is not suitable for serving large files or guaranteeing persistence.
+-   CollectionBuilder lacks built-in support for versioning and persistent identifiers at the level required by research data infrastructures.
 
 To address these challenges, we are implementing a [transition pipeline](https://dokumentation.stadtgeschichtebasel.ch/omeka2dsp) to archive all metadata and associated files with DaSCH, leveraging its infrastructure for versioned, durable, and FAIR-compliant research data publication. The new pipeline includes:
 
-1. Metadata harvesting and transformation from Omeka to the DaSCH data model.
-2. Automated deposit and update routines using the DaSCH REST API, including support for versioning existing records.
-3. Writing back stable DaSCH identifiers and access URLs to our public-facing platform, ensuring transparency and citability.
-4. Preservation of hierarchical relationships and media metadata, aligned with our custom metadata model, which incorporates principles of anti-discriminatory description practices.
+1.  Metadata harvesting and transformation from Omeka to the DaSCH data model.
+2.  Automated deposit and update routines using the DaSCH REST API, including support for versioning existing records.
+3.  Writing back stable DaSCH identifiers and access URLs to our public-facing platform, ensuring transparency and citability.
+4.  Preservation of hierarchical relationships and media metadata, aligned with our custom metadata model, which incorporates principles of anti-discriminatory description practices.
 
 This transition allows us to decouple the archival backend from the front-end presentation, ensuring long-term data accessibility, citability, and semantic interoperability. In our presentation, we will share the architectural overview, code-level considerations, and our reflections on working with DaSCH APIs in a real-world context, including:
 
-- Lessons learned in metadata crosswalks and transformation logic.
-- Technical caveats in version control, file transfers, and identifier management.
-- Challenges in aligning minimal computing approaches (CollectionBuilder) with robust backend infrastructures (DSP).
+-   Lessons learned in metadata crosswalks and transformation logic.
+-   Technical caveats in version control, file transfers, and identifier management.
+-   Challenges in aligning minimal computing approaches (CollectionBuilder) with robust backend infrastructures (DSP).
 
 This case study illustrates how lightweight digital publishing environments can be effectively combined with national research infrastructures to deliver sustainable, standards-based access to historical research data. It also raises broader questions about infrastructural independence, scalability of humanities platforms, and the practical challenges of implementing FAIR principles in community-developed software ecosystems.

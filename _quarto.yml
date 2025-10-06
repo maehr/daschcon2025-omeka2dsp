@@ -27,9 +27,9 @@ website:
       - text: Home
         href: index.qmd
       - text: Abstract
-        href: abstract/abstract.qmd
+        href: abstract/index.qmd
       - text: Presentation
-        href: presentation/presentation.qmd
+        href: presentation/index.qmd
 
   sidebar:
     contents:
@@ -37,9 +37,9 @@ website:
         href: index.qmd
         contents:
           - text: Abstract
-            href: abstract/abstract.qmd
+            href: abstract/index.qmd
           - text: Presentation
-            href: presentation/presentation.qmd
+            href: presentation/index.qmd
           - text: Changelog
             href: CHANGELOG.md
           - text: Code of Conduct
