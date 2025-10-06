@@ -42,6 +42,8 @@ website:
             href: presentation/index.qmd
           - text: Changelog
             href: CHANGELOG.md
+          - text: Citation
+            href: CITATION.cff
           - text: Code of Conduct
             href: CODE_OF_CONDUCT.md
           - text: Contributing
