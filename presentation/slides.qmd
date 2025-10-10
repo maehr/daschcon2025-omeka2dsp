@@ -34,149 +34,288 @@ format:
   #   reference-doc: "SGB_PowerPoint_Vorlage.potx"
 ---
 
-## Introduction
+## Stadt.Geschichte.Basel
 
-::: incremental
+-   Large-scale historical research project, initiated in 2011 by the Association for Basel History and carried out 2017–2026 at the University of Basel
+-   More than 70 researchers studying the history of Basel from the earliest settlements to the present day
+-   Funded with more than 9 million Swiss francs by the Canton of Basel-Stadt, the Lottery Fund, and private sponsors
+-   Specialized team for research data management and public history
 
-- The [Forschungsdatenplattform Stadt.Geschichte.Basel](https://forschung.stadtgeschichtebasel.ch)
-- Open access to historical materials (texts, images, statistical, geospatial data)
-- Current infrastructure: Omeka-S → CollectionBuilder-CSV → GitHub Pages
-- Problem: Sustainability and scalability challenges
-:::
-
-## Current Architecture
+## Research Data
 
 ```{mermaid}
-graph LR
-    A[Omeka-S<br/>University of Bern] -->|Export| B[CollectionBuilder<br/>CSV]
-    B -->|Deploy| C[GitHub Pages]
-    C -->|Public Access| D[Users]
+flowchart LR
+  subgraph Research[Research]
+    Publications[📚 Publications]
+    Data[📊 Statistical & Geo Data]
+    Code[💻 Source Code]
+  end
 ```
 
-## Critical Limitations
-
-::: incremental
-
-1. **Institutional Control**: Omeka not under our control
-2. **Persistence**: GitHub Pages not suitable for large files
-3. **FAIR Compliance**: No versioning or persistent identifiers
-4. **Long-term Funding**: Infrastructure dependencies
-:::
-
-## The Solution: omeka2dsp Pipeline
-
-::: incremental
-
-- Archive with DaSCH infrastructure
-- Versioned, durable, FAIR-compliant publication
-- Decoupled archival backend from presentation layer
-:::
-
-## New Architecture
+## Collecting and Managing research data
 
 ```{mermaid}
-graph LR
-    A[Omeka-S] -->|omeka2dsp<br/>Pipeline| B[DaSCH/DSP<br/>Archive]
-    B -->|Stable IDs| C[CollectionBuilder]
-    C -->|Deploy| D[GitHub Pages]
-    B -.->|Long-term<br/>Preservation| E[Users]
-    D -->|Public Access| E
+flowchart LR
+  subgraph Research[Research]
+    Publications[📚 Publications]
+    Data[📊 Statistical & Geo Data]
+    Code[💻 Source Code]
+  end
+
+  subgraph Repositories
+    Omeka[(📁 omeka.unibe.ch)]
+    GitHub[(🐙 GitHub)]
+  end
+
+  %% Flows
+  Publications -- figures --> Omeka
+  Data -- visualizations --> Omeka
+  Code --> GitHub
 ```
 
-## Pipeline Components
+## Public history with research data
 
-::: incremental
+```{mermaid}
+flowchart LR
+  subgraph Research[Research]
+    Publications[📚 Publications]
+    Data[📊 Statistical & Geo Data]
+    Code[💻 Source Code]
+  end
 
-1. **Metadata Harvesting**: Omeka → DaSCH data model
-2. **Automated Deposit**: REST API integration with versioning
-3. **Identifier Management**: Write back stable DaSCH identifiers
-4. **Relationship Preservation**: Hierarchies and media metadata
-:::
+  subgraph Repositories
+    Omeka[(📁 omeka.unibe.ch)]
+    GitHub[(🐙 GitHub)]
+  end
 
-## Technical Implementation
+  subgraph PublicWeb[Public History Websites]
+    RDP[forschung.stadtgeschichtebasel.ch]
 
-### Metadata Transformation
+  %% Flows
+  Publications -- figures --> Omeka
+  Data -- visualizations --> Omeka
+  Code --> GitHub
+  Omeka -- API --> RDP
+  GitHub -- Static Site Generator --> RDP
+```
 
-- Custom crosswalks from Omeka to DaSCH
-- Anti-discriminatory description practices
-- Preservation of hierarchical relationships
+## Archiving research data for the long term
 
-### API Integration
+```{mermaid}
+flowchart LR
+  subgraph Research[Research]
+    Publications[📚 Publications]
+    Data[📊 Statistical & Geo Data]
+    Code[💻 Source Code]
+  end
 
-- DaSCH REST API for deposits and updates
-- Version control for existing records
-- Automated identifier writeback
+  subgraph Repositories[Repositories]
+    Omeka[(📁 omeka.unibe.ch)]
+    GitHub[(🐙 GitHub)]
+  end
 
-## Lessons Learned
+  subgraph PublicWeb[Public History Websites]
+    RDP[forschung.stadtgeschichtebasel.ch]
+  end
 
-::: incremental
+  subgraph Archives[Long-term Archives]
+    Zenodo[(📦 Zenodo)]
+    DaSCH[(🏛️ DaSCH)]
+    UBBasel[(📚 Universitätsbibliothek Basel)]
+  end
 
-- **Metadata Crosswalks**: Complex mapping logic required
-- **Version Control**: Careful handling of updates and versions
-- **File Transfers**: Large file handling considerations
-- **Identifier Management**: Bidirectional synchronization
-:::
+  %% Flows
+  Publications -- figures --> Omeka
+  Publications -- books --> UBBasel
+  Publications -- other publications --> Zenodo
+  Data -- visualizations --> Omeka
+  Omeka -- API --> RDP
+  GitHub -- static site generator --> RDP
+  Code --> GitHub
+  GitHub --> Zenodo
+  Omeka --> DaSCH
+```
+
+## Why long-term archiving?
+
+1.  **Institutional Control**: Omeka not under our control
+2.  **Persistence**: GitHub Pages not suitable for large files
+3.  **FAIR Compliance**: No versioning or persistent identifiers
+4.  **Long-term Funding**: Infrastructure dependencies
+
+## Where DaSCH fits in
+
+```{mermaid}
+flowchart LR
+  subgraph Research[Research]
+    Publications[📚 Publications]
+    Data[📊 Statistical & Geo Data]
+  end
+
+  subgraph Repositories
+    Omeka[(📁 omeka.unibe.ch)]
+  end
+
+  subgraph Archives[Long-term Archives]
+    DaSCH[(🏛️ DaSCH)]
+  end
+
+  %% Flows
+  Publications -- figures --> Omeka
+  Data -- visualizations --> Omeka
+  Omeka --> DaSCH
+```
 
 ## Challenges
 
-::: incremental
+- Data model differences (Omeka vs DaSCH)
+- Metadata transformation and crosswalks
+- Version control and updates
 
-- Aligning minimal computing (CollectionBuilder) with robust backends (DSP)
-- Maintaining infrastructure independence
-- Scaling humanities platforms
-- Implementing FAIR principles in practice
-:::
+# Data model differences
 
-## Benefits
+# Omeka
 
-::: incremental
+Item
 
-- **Long-term Accessibility**: Institutional backing
-- **Citability**: Persistent identifiers
-- **Semantic Interoperability**: Standardized metadata
-- **Version Control**: Track changes over time
-- **Decoupling**: Independent presentation and archival layers
-:::
+Medium
 
-## Broader Implications
+## Data model Omeka (simplified)
 
-::::: columns
-::: {.column width="50%"}
+```{mermaid}
+classDiagram
+  %% Core Omeka S entities (reduced)
+  class Item {
+    o:id : int
+    o:is_public : bool
+    o:title : string
+    dcterms:identifier : string
+    dcterms:subject[*] : IconclassTerm
+    dcterms:temporal : Era
+    dcterms:language : ISO639_2
+    o:created : datetime
+    o:modified : datetime
+  }
 
-### Questions Raised
+  class Media {
+    o:id : int
+    o:item_id : int
+    o:ingester : string
+    o:media_type : MIME
+    o:original_url : uri
+    o:sha256 : hash
+    dcterms:creator[*] : uri|text
+    dcterms:date : string~EDTF
+    dcterms:license : LicenseURI
+    dcterms:rights : text
+  }
 
-- Infrastructural independence
-- Platform scalability
-- FAIR principles in practice
-:::
+  class ItemSet {
+    o:id : int
+    o:label : string
+  }
 
-::: {.column width="50%"}
+  %% Controlled vocabularies as types
+  class Era { <<type>> }
+  class MIME { <<type>> }
+  class LicenseURI { <<type>> }
+  class IconclassTerm {
+    <<external scheme>>
+    code : string
+    label : string
+  }
+  class ISO639_2 {
+    <<code>>
+    value : string
+  }
 
-### Community Impact
+  %% Relations and cardinalities
+  Item "1" o-- "0..*" Media : has media
+  Media "*" --> "1" Item : belongs to
+  Item "*" o-- "0..*" ItemSet : in set(s)
+  Item --> "0..*" IconclassTerm : subjects
+  Media --> "0..*" IconclassTerm : subjects
+  Item --> "1" Era : temporal
+  Media --> "1" Era : temporal
+  Media --> MIME : media_type
+  Media --> LicenseURI : license
+  Item --> ISO639_2 : language
+```
 
-- Lightweight publishing + robust infrastructure
-- Standards-based access
-- Community-developed ecosystems
-:::
-:::::
+## Data model DaSCH (simplified)
 
-## Resources
+```{mermaid}
+classDiagram
+class Parent
+class Document
+class ResourceWithoutMedia
+class Image
 
-::: nonincremental
+class SubjectList
+class LanguageList
+class TypeList
+class FormatList
+class TemporalList
+class LicenseList
 
-- [Forschungsdatenplattform](https://forschung.stadtgeschichtebasel.ch)
-- [omeka2dsp Documentation](https://dokumentation.stadtgeschichtebasel.ch/omeka2dsp)
-- [Stadt.Geschichte.Basel](https://stadtgeschichtebasel.ch)
-- [This Repository](https://github.com/maehr/daschcon2025-omeka2dsp)
-:::
+%% Core links to Parent object
+Document "0..1" --> "1" Parent : linkToParentObject
+ResourceWithoutMedia "0..1" --> "1" Parent : linkToParentObject
+Image "0..1" --> "1" Parent : linkToParentObject
 
-## Thank You
+%% Value-list relations
+Parent "1" --> "1" TemporalList : hasTemporalList
+Parent "1" --> "0..*" SubjectList : hasSubjectList
+Parent "1" --> "0..1" LanguageList : hasLanguageList
 
-### Questions?
+Document "1" --> "0..1" SubjectList : hasSubjectList
+Document "1" --> "0..1" TemporalList : hasTemporalList
+Document "1" --> "0..1" TypeList : hasTypeList
+Document "1" --> "0..1" FormatList : hasFormatList
+Document "1" --> "0..1" LanguageList : hasLanguageList
+Document "1" --> "0..1" LicenseList : hasLicenseList
 
-::: nonincremental
-**Contact:**
+ResourceWithoutMedia "1" --> "0..1" SubjectList : hasSubjectList
+ResourceWithoutMedia "1" --> "0..1" TemporalList : hasTemporalList
+ResourceWithoutMedia "1" --> "0..1" TypeList : hasTypeList
+ResourceWithoutMedia "1" --> "0..1" FormatList : hasFormatList
+ResourceWithoutMedia "1" --> "0..1" LanguageList : hasLanguageList
+ResourceWithoutMedia "1" --> "0..1" LicenseList : hasLicenseList
 
-- Moritz Mähr: [moritz.maehr\@gmail.com](mailto:moritz.maehr@gmail.com)
-- Moritz Twente: [mtwente\@protonmail.com](mailto:mtwente@protonmail.com)
-:::
+Image "1" --> "0..1" SubjectList : hasSubjectList
+Image "1" --> "0..1" TemporalList : hasTemporalList
+Image "1" --> "0..1" TypeList : hasTypeList
+Image "1" --> "0..1" FormatList : hasFormatList
+Image "1" --> "0..1" LanguageList : hasLanguageList
+Image "1" --> "0..1" LicenseList : hasLicenseList
+```
+
+## Key differences
+
+* **Modeling approach:**
+
+  * *DaSCH*: Ontology-driven, class hierarchy (`Resource` → `Document` / `Image` …), explicit value classes (`TextValue`, `ListValue`).
+  * *Omeka S*: Flat JSON-LD model (`Item`, `Media`, `ItemSet`), Dublin Core–centric.
+* **Normalization & constraints:**
+
+  * *DaSCH*: Strict cardinalities and mandatory fields (`hasTitle [1]`).
+  * *Omeka S*: Flexible, validation through profiles/modules.
+* **Hierarchy representation:**
+
+  * *DaSCH*: Explicit `Parent` class and `linkToParentObject`.
+  * *Omeka S*: Uses `ItemSet` or `dcterms:isPartOf`, no dedicated parent class.
+
+# Metadata transformation
+
+## Data validation
+
+- Custom Python scripts using `pydantic` for schema validation as Omeka does not enforce strict validation
+- Validation also helps identify data quality issues
+- Lots of manual cleaning required, all done in Omeka
+
+## Mapping Omeka to DaSCH
+
+
+
+# Version control and updates
+
