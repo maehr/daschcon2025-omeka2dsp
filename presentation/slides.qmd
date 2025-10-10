@@ -20,7 +20,7 @@ format:
     theme: simple
     css: /styles.css
     slide-number: true
-    incremental: true
+    incremental: false
     # transition: slide
     code-line-numbers: true
     embed-resources: true
@@ -36,10 +36,10 @@ format:
 
 ## Stadt.Geschichte.Basel
 
--   Large-scale historical research project, initiated in 2011 by the Association for Basel History and carried out 2017–2026 at the University of Basel
--   More than 70 researchers studying the history of Basel from the earliest settlements to the present day
--   Funded with more than 9 million Swiss francs by the Canton of Basel-Stadt, the Lottery Fund, and private sponsors
--   Specialized team for research data management and public history
+- Large-scale historical research project, initiated in 2011 by the Association for Basel History and carried out 2017–2026 at the University of Basel
+- More than 70 researchers studying the history of Basel from the earliest settlements to the present day
+- Funded with more than 9 million Swiss francs by the Canton of Basel-Stadt, the Lottery Fund, and private sponsors
+- Specialized team for research data management and public history
 
 ## Research Data
 
@@ -83,20 +83,21 @@ flowchart LR
     Code[💻 Source Code]
   end
 
-  subgraph Repositories
+  subgraph Repositories[Repositories]
     Omeka[(📁 omeka.unibe.ch)]
     GitHub[(🐙 GitHub)]
   end
 
   subgraph PublicWeb[Public History Websites]
     RDP[forschung.stadtgeschichtebasel.ch]
+  end
 
   %% Flows
   Publications -- figures --> Omeka
   Data -- visualizations --> Omeka
   Code --> GitHub
   Omeka -- API --> RDP
-  GitHub -- Static Site Generator --> RDP
+  GitHub -- static site generator --> RDP
 ```
 
 ## Archiving research data for the long term
@@ -115,13 +116,13 @@ flowchart LR
   end
 
   subgraph PublicWeb[Public History Websites]
-    RDP[forschung.stadtgeschichtebasel.ch]
+    RDP[Research Data Platform<br>forschung.stadtgeschichtebasel.ch]
   end
 
   subgraph Archives[Long-term Archives]
     Zenodo[(📦 Zenodo)]
     DaSCH[(🏛️ DaSCH)]
-    UBBasel[(📚 Universitätsbibliothek Basel)]
+    UBBasel[(📚 University Library Basel)]
   end
 
   %% Flows
@@ -130,20 +131,19 @@ flowchart LR
   Publications -- other publications --> Zenodo
   Data -- visualizations --> Omeka
   Omeka -- API --> RDP
-  GitHub -- static site generator --> RDP
+  GitHub -- Static Site Generator --> RDP
   Code --> GitHub
   GitHub --> Zenodo
   Omeka --> DaSCH
 ```
 
-## Why long-term archiving?
+## Ensuring FAIR and long-term preservation
 
-1.  **Institutional Control**: Omeka not under our control
-2.  **Persistence**: GitHub Pages not suitable for large files
-3.  **FAIR Compliance**: No versioning or persistent identifiers
-4.  **Long-term Funding**: Infrastructure dependencies
+- Research data must be Findable, Accessible, Interoperable, and Reusable (FAIR)
+- Research data must be stored in trusted repositories with proper metadata and persistent identifiers (PIDs)
+- FIXME: add more
 
-## Where DaSCH fits in
+## Where DaSCH fits in
 
 ```{mermaid}
 flowchart LR
@@ -172,15 +172,19 @@ flowchart LR
 - Metadata transformation and crosswalks
 - Version control and updates
 
-# Data model differences
+#  Data model differences
 
 # Omeka
 
-Item
+# {data-background-image="./images/omeka-collection.png"}
 
-Medium
+# {data-background-image="./images/omeka-item.png"}
 
-## Data model Omeka (simplified)
+# {data-background-image="./images/omeka-medium_1.png"}
+
+# {data-background-image="./images/omeka-medium_2.png"}
+
+##  Data model Omeka (simplified)
 
 ```{mermaid}
 classDiagram
@@ -292,18 +296,18 @@ Image "1" --> "0..1" LicenseList : hasLicenseList
 
 ## Key differences
 
-* **Modeling approach:**
+- **Modeling approach:**
 
-  * *DaSCH*: Ontology-driven, class hierarchy (`Resource` → `Document` / `Image` …), explicit value classes (`TextValue`, `ListValue`).
-  * *Omeka S*: Flat JSON-LD model (`Item`, `Media`, `ItemSet`), Dublin Core–centric.
-* **Normalization & constraints:**
+  - *DaSCH*: Ontology-driven, class hierarchy (`Resource` → `Document` / `Image` …), explicit value classes (`TextValue`, `ListValue`).
+  - *Omeka S*: Flat JSON-LD model (`Item`, `Media`, `ItemSet`), Dublin Core–centric.
+- **Normalization & constraints:**
 
-  * *DaSCH*: Strict cardinalities and mandatory fields (`hasTitle [1]`).
-  * *Omeka S*: Flexible, validation through profiles/modules.
-* **Hierarchy representation:**
+  - *DaSCH*: Strict cardinalities and mandatory fields (`hasTitle [1]`).
+  - *Omeka S*: Flexible, validation through profiles/modules.
+- **Hierarchy representation:**
 
-  * *DaSCH*: Explicit `Parent` class and `linkToParentObject`.
-  * *Omeka S*: Uses `ItemSet` or `dcterms:isPartOf`, no dedicated parent class.
+  - *DaSCH*: Explicit `Parent` class and `linkToParentObject`.
+  - *Omeka S*: Uses `ItemSet` or `dcterms:isPartOf`, no dedicated parent class.
 
 # Metadata transformation
 
@@ -315,7 +319,4 @@ Image "1" --> "0..1" LicenseList : hasLicenseList
 
 ## Mapping Omeka to DaSCH
 
-
-
 # Version control and updates
-
