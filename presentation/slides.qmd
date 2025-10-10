@@ -14,7 +14,35 @@ author:
     email: "mtwente@protonmail.com"
 date: 2025-10-15
 abstract: |
-  TBD
+  The Forschungsdatenplattform by Stadt.Geschichte.Basel provides open access to diverse historical materials relating to the city of Basel, including texts, images, statistical, and geospatial data. While technically robust and publicly available through GitHub Pages using the CollectionBuilder-CSV, our current infrastructure faces critical sustainability and scalability limitations.
+
+  At present, metadata and files are curated and managed using the Omeka-S instance provided by the University of Bern, from which we extract the data for display via CollectionBuilder. However, this setup introduces significant risks for long-term availability:
+
+  - Omeka is not under our institutional control and may not remain permanently funded.
+
+  - GitHub Pages is not suitable for serving large files or guaranteeing persistence.
+
+  - CollectionBuilder lacks built-in support for versioning and persistent identifiers at the level required by research data infrastructures.
+
+  To address these challenges, we are implementing a transition pipeline to archive all metadata and associated files with DaSCH, leveraging its infrastructure for versioned, durable, and FAIR-compliant research data publication. The new pipeline includes:
+
+  1. Metadata harvesting and transformation from Omeka to the DaSCH data model.
+
+  2. Automated deposit and update routines using the DaSCH REST API, including support for versioning existing records.
+
+  3. Writing back stable DaSCH identifiers and access URLs to our public-facing platform, ensuring transparency and citability.
+
+  4. Preservation of hierarchical relationships and media metadata, aligned with our custom metadata model, which incorporates principles of anti-discriminatory description practices.
+
+  This transition allows us to decouple the archival backend from the front-end presentation, ensuring long-term data accessibility, citability, and semantic interoperability. In our presentation, we will share the architectural overview, code-level considerations, and our reflections on working with DaSCH APIs in a real-world context, including:
+
+  - Lessons learned in metadata crosswalks and transformation logic.
+
+  - Technical caveats in version control, file transfers, and identifier management.
+
+  - Challenges in aligning minimal computing approaches (CollectionBuilder) with robust backend infrastructures (DSP).
+
+  This case study illustrates how lightweight digital publishing environments can be effectively combined with national research infrastructures to deliver sustainable, standards-based access to historical research data. It also raises broader questions about infrastructural independence, scalability of humanities platforms, and the practical challenges of implementing FAIR principles in community-developed software ecosystems.
 format:
   revealjs:
     theme: simple
@@ -36,10 +64,12 @@ format:
 
 ## Stadt.Geschichte.Basel
 
-- Large-scale historical research project, initiated in 2011 by the Association for Basel History and carried out 2017–2026 at the University of Basel
-- More than 70 researchers studying the history of Basel from the earliest settlements to the present day
-- Funded with more than 9 million Swiss francs by the Canton of Basel-Stadt, the Lottery Fund, and private sponsors
-- Specialized team for research data management and public history
+-   Large-scale historical research project, initiated in 2011 by the Association for Basel History and carried out 2017–2026 at the University of Basel
+-   More than 70 researchers studying the history of Basel from the earliest settlements to the present day
+-   Funded with more than 9 million Swiss francs by the Canton of Basel-Stadt, the Lottery Fund, and private sponsors
+-   Specialized team for research data management and public history
+-   Various research outputs, including books, papers, data stories, figures, and source code published on [forschung.stadtgeschichtebasel.ch](https://forschung.stadtgeschichtebasel.ch) and [dokumentation.stadtgeschichtebasel.ch](https://dokumentation.stadtgeschichtebasel.ch)
+
 
 ## Research Data
 
@@ -137,11 +167,13 @@ flowchart LR
   Omeka --> DaSCH
 ```
 
-## Ensuring FAIR and long-term preservation
+## Motivation / Why does this matter?
 
-- Research data must be Findable, Accessible, Interoperable, and Reusable (FAIR)
-- Research data must be stored in trusted repositories with proper metadata and persistent identifiers (PIDs)
-- FIXME: add more
+-   **Institutional sustainability**: External dependencies (Omeka at UniBern) may not be permanently funded
+-   **FAIR principles**: Research data must be Findable, Accessible, Interoperable, and Reusable
+-   **Long-term preservation**: Need trusted repositories with proper metadata and persistent identifiers (PIDs)
+-   **Citability**: Researchers need stable URLs and DOIs to reference historical materials
+-   **Scalability**: Current minimal computing approach (GitHub Pages) cannot handle large files
 
 ## Where DaSCH fits in
 
@@ -168,21 +200,22 @@ flowchart LR
 
 ## Challenges
 
-- Data model differences (Omeka vs DaSCH)
-- Metadata transformation and crosswalks
-- Version control and updates
+-   Data model differences (Omeka vs DaSCH)
+-   Metadata transformation and crosswalks
+-   Version control and updates
+-   Automation of deposit and update routines
 
 #  Data model differences
 
 # Omeka
 
-# {data-background-image="./images/omeka-collection.png"}
+#  {data-background-image="./images/omeka-collection.png"}
 
-# {data-background-image="./images/omeka-item.png"}
+#  {data-background-image="./images/omeka-item.png"}
 
-# {data-background-image="./images/omeka-medium_1.png"}
+#  {data-background-image="./images/omeka-medium_1.png"}
 
-# {data-background-image="./images/omeka-medium_2.png"}
+#  {data-background-image="./images/omeka-medium_2.png"}
 
 ##  Data model Omeka (simplified)
 
@@ -296,27 +329,156 @@ Image "1" --> "0..1" LicenseList : hasLicenseList
 
 ## Key differences
 
-- **Modeling approach:**
+-   **Modeling approach:**
 
-  - *DaSCH*: Ontology-driven, class hierarchy (`Resource` → `Document` / `Image` …), explicit value classes (`TextValue`, `ListValue`).
-  - *Omeka S*: Flat JSON-LD model (`Item`, `Media`, `ItemSet`), Dublin Core–centric.
-- **Normalization & constraints:**
+    -   *DaSCH*: Ontology-driven, class hierarchy (`Resource` → `Document` / `Image` …), explicit value classes (`TextValue`, `ListValue`).
+    -   *Omeka S*: Flat JSON-LD model (`Item`, `Media`, `ItemSet`), Dublin Core–centric.
 
-  - *DaSCH*: Strict cardinalities and mandatory fields (`hasTitle [1]`).
-  - *Omeka S*: Flexible, validation through profiles/modules.
-- **Hierarchy representation:**
+-   **Normalization & constraints:**
 
-  - *DaSCH*: Explicit `Parent` class and `linkToParentObject`.
-  - *Omeka S*: Uses `ItemSet` or `dcterms:isPartOf`, no dedicated parent class.
+    -   *DaSCH*: Strict cardinalities and mandatory fields (`hasTitle [1]`).
+    -   *Omeka S*: Flexible, validation through profiles/modules.
+
+-   **Hierarchy representation:**
+
+    -   *DaSCH*: Explicit `Parent` class and `linkToParentObject`.
+    -   *Omeka S*: Uses `ItemSet` or `dcterms:isPartOf`, no dedicated parent class.
 
 # Metadata transformation
 
 ## Data validation
 
-- Custom Python scripts using `pydantic` for schema validation as Omeka does not enforce strict validation
-- Validation also helps identify data quality issues
-- Lots of manual cleaning required, all done in Omeka
+-   Custom Python scripts using `pydantic` for schema validation as Omeka does not enforce strict validation
+-   Validation also helps identify data quality issues
+-   Lots of manual cleaning required, all done in Omeka
 
 ## Mapping Omeka to DaSCH
 
-# Version control and updates
+::::: columns
+::: {.column width="50%"}
+### Omeka Structure
+
+-   Flat JSON-LD model
+-   Dublin Core properties
+-   `Item` → `Media` relationship
+-   `ItemSet` for grouping
+:::
+
+::: {.column width="50%"}
+### DaSCH Structure
+
+-   Ontology-driven hierarchy
+-   `Parent` → `Document` / `Image`
+-   Explicit `linkToParentObject`
+-   Strict cardinalities
+:::
+:::::
+
+## Crosswalk Examples
+
+| Omeka Property | DaSCH Property | Notes |
+|------------------------|------------------------|------------------------|
+| `dcterms:title` | `hasTitle` | Required in DaSCH (cardinality 1) |
+| `dcterms:identifier` | Mapped to ARK identifier | Used for stable references |
+| `dcterms:subject` | `hasSubjectList` | Iconclass codes preserved |
+| `dcterms:temporal` | `hasTemporalList` | Era mapping required |
+| `dcterms:creator` | `hasCreatorList` | Multiple creators supported |
+| `dcterms:license` | `hasLicenseList` | License URIs validated |
+| Media → Item | `linkToParentObject` | Hierarchy explicitly modeled |
+
+## Version control and updates
+
+-   **Challenge**: DaSCH supports versioning, but requires careful planning
+-   **Strategy**:
+    -   Initial deposit: Create new resources via REST API
+    -   Updates: Use PUT requests with resource IDs to create new versions
+    -   Identifier stability: ARK IDs remain constant across versions
+-   **Writeback**: Store DaSCH identifiers back to Omeka for bidirectional linking
+-   **Tracking**: Maintain mapping between Omeka IDs and DaSCH ARKs
+
+## API vs DSP-Tools
+
+::::: columns
+::: {.column width="50%"}
+### REST API Approach
+
+-   Direct HTTP requests
+-   Fine-grained control
+-   Supports versioning
+-   Complex error handling
+-   Used for updates
+:::
+
+::: {.column width="50%"}
+### DSP-Tools Approach
+
+-   XML-based bulk import
+-   Good for initial deposits
+-   Less flexible for updates
+-   Comprehensive validation
+-   Used for large-scale ingestion
+:::
+:::::
+
+**Our choice**: Hybrid approach using both tools depending on the task
+
+# omeka2dsp
+
+#  {data-background-image="./images/omeka2dsp_1.png"}
+
+#  {data-background-image="./images/omeka2dsp_2.png"}
+
+#  {data-background-image="./images/omeka2dsp_3.png"}
+
+## Lessons Learned
+
+### Technical Challenges
+
+-   **Metadata crosswalks**: Dublin Core to DaSCH ontology requires custom mapping logic and validation
+-   **Data quality**: Omeka's flexibility means inconsistent data—extensive cleaning required
+-   **File handling**: Large images (\>100MB) require special consideration and chunked uploads
+-   **Identifier management**: Bidirectional synchronization between Omeka and DaSCH is complex
+
+## Lessons Learned (continued)
+
+### Workflow Insights
+
+-   **Timing matters**: Decide when to switch from active curation (Omeka) to archival mode (DaSCH)
+-   **Validation is critical**: `pydantic` schemas caught many data quality issues early
+-   **Documentation essential**: Clear mapping specifications prevent errors during transformation
+-   **Test with subsets**: Validate pipeline with small batches before full ingestion
+
+## Lessons Learned (continued)
+
+### Architectural Decisions
+
+-   **Decoupling works**: Separation of archival backend (DaSCH) from presentation layer (CollectionBuilder) provides flexibility
+-   **Minimal computing + robust infrastructure**: Lightweight public websites can coexist with enterprise-grade preservation systems
+-   **APIs enable automation**: Automated pipelines reduce manual work and ensure consistency
+-   **Community tools matter**: Open-source tools (CollectionBuilder, DSP-Tools) enable customization
+
+## Key Takeaways
+
+::::: columns
+::: {.column width="50%"}
+### For the Community
+-   Lightweight publishing can work with robust infrastructure
+-   FAIR principles are achievable in practice
+-   Decoupled architectures provide flexibility
+-   Open-source tools enable customization
+:::
+
+::: {.column width="50%"}
+### For DaSCH Users
+-   Plan metadata transformation early
+-   Use validation extensively
+-   Consider hybrid API/DSP-Tools approach
+-   Document mapping decisions thoroughly
+:::
+:::::
+
+## Resources
+
+-   [Research Data Platform](https://forschung.stadtgeschichtebasel.ch)
+-   [omeka2dsp Documentation](https://dokumentation.stadtgeschichtebasel.ch/omeka2dsp)
+-   [Documentation Platform](https://dokumentation.stadtgeschichtebasel.ch)
