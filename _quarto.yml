@@ -69,3 +69,7 @@ format:
 freeze: true
 
 editor: visual
+
+# Global Mermaid config
+mermaid:
+  theme: neutral
