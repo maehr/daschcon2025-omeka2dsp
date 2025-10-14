@@ -600,6 +600,22 @@ style Parent fill:#fff3e0
 
 ## Resources
 
-- [Research Data Platform](https://forschung.stadtgeschichtebasel.ch)
-- [omeka2dsp Documentation](https://dokumentation.stadtgeschichtebasel.ch/omeka2dsp)
-- [Documentation Platform](https://dokumentation.stadtgeschichtebasel.ch)
+::::: {layout="[[-1], [1], [-1]]"}
+
+:::: {.columns}
+
+::: {.column width="33%"}
+![[Research Data Platform](https://forschung.stadtgeschichtebasel.ch)](./images/research_data_platform.png){fig-align="center"}
+:::
+
+::: {.column width="33%"}
+![[omeka2dsp Documentation](https://dokumentation.stadtgeschichtebasel.ch/omeka2dsp)](./images/omeka2dsp_overview.png){fig-align="center"}
+:::
+
+::: {.column width="33%"}
+![[Documentation Platform](https://dokumentation.stadtgeschichtebasel.ch)](./images/documentation_platform.png){fig-align="center"}
+:::
+
+::::
+
+:::::
