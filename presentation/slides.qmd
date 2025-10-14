@@ -295,19 +295,19 @@ style Archives stroke:#3a1e3e
 -   Metadata transformation and crosswalks
 -   Automation of deposit and version control
 
-#  Data model differences
+#  Data Model Differences
 
 # Omeka
 
-# {data-background-image="./images/omeka-collection.png"}
+#  {data-background-image="./images/omeka-collection.png"}
 
-# {data-background-image="./images/omeka-item.png"}
+#  {data-background-image="./images/omeka-item.png"}
 
-# {data-background-image="./images/omeka-medium_1.png"}
+#  {data-background-image="./images/omeka-medium_1.png"}
 
-# {data-background-image="./images/omeka-medium_2.png"}
+#  {data-background-image="./images/omeka-medium_2.png"}
 
-##  Data model Omeka (simplified 😇)
+##  Data Model Omeka (simplified 😇)
 
 ![](./images/mermaid/datamodel_omeka.png){fig-align="center"}
 
@@ -391,7 +391,7 @@ style Item fill:#ffe880,stroke:#3a1e3e,color:#3a1e3e
 style Media fill:#fff3e0,stroke:#3a1e3e,color:#3a1e3e
 ```
 
-## Data model DaSCH (simplified 😅)
+## Data Model DaSCH (simplified 😅)
 
 ::: {layout="[[-1], [1], [-1]]"}
 ![](./images/mermaid/datamodel_dasch.png){fig-align="center"}
@@ -465,35 +465,27 @@ style Image fill:#ffe880
 style Parent fill:#fff3e0
 ```
 
-## Key differences
+## Key Differences
 
-- **Modeling approach:**
+-   **Modeling approach:**
 
-  - *DaSCH*: Class hierarchy (`Resource` → `Document` / `Image` …), explicit value classes (`TextValue`, `ListValue`).
-  - *Omeka S*: Flat JSON-LD model (`Item`, `Media`, `ItemSet`), Dublin Core–centric.
     -   *DaSCH*: Class hierarchy (`Resource` → `Document` / `Image` …), explicit value classes (`TextValue`, `ListValue`).
     -   *Omeka S*: Flat JSON-LD model (`Item`, `Media`, `ItemSet`), Dublin Core–centric.
 
-- **Normalization & constraints:**
+-   **Normalization & constraints:**
 
-  - *DaSCH*: Strict cardinalities and mandatory fields (`hasTitle [1]`).
-  - *Omeka S*: More flexible, "validation" through templates.
     -   *DaSCH*: Strict cardinalities and mandatory fields (`hasTitle [1]`).
     -   *Omeka S*: More flexible, "validation" through templates.
 
-- **Hierarchy representation:**
+-   **Hierarchy representation:**
 
-  - *DaSCH*: Explicit `Parent` class and `linkToParentObject`.
-  - *Omeka S*: Uses field `ItemSet` or `Media` to model relations.
     -   *DaSCH*: Explicit `Parent` class and `linkToParentObject`.
     -   *Omeka S*: Uses field `ItemSet` or `Media` to model relations.
 
-# Metadata transformation
+# Metadata Transformation
 
-## Data validation
+## Data Validation
 
-- Custom Python scripts using `pydantic` for schema validation as Omeka does not enforce strict validation
-- Validation also helps identify data quality issues
 -   Custom Python scripts using `pydantic` for schema validation as Omeka does not enforce strict validation
 -   Validation also helps identify data quality issues
 -   Lots of manual cleaning required, all done in Omeka
@@ -510,10 +502,8 @@ style Parent fill:#fff3e0
 | `dcterms:license` | `hasLicenseList` | License URIs validated |
 | Media → Item | `linkToParentObject` | Hierarchy explicitly modeled |
 
-## Version control and updates
+## Version Control and Updates
 
-- **Challenge**: DaSCH supports versioning, but requires careful planning
-- **Strategy**:
 -   **Challenge**: DaSCH supports versioning, but requires careful planning
 -   **Strategy**:
     -   Initial deposit: Create new resources via REST API
@@ -524,11 +514,8 @@ style Parent fill:#fff3e0
 
 ::::: columns
 ::: {.column width="50%"}
-
 ### REST API Approach
 
-- Direct HTTP requests
-- Fine-grained control
 -   Direct HTTP requests
 -   Fine-grained control
 -   Supports versioning
@@ -537,11 +524,8 @@ style Parent fill:#fff3e0
 :::
 
 ::: {.column width="50%"}
-
 ### DSP-Tools Approach
 
-- XML-based bulk import
-- Good for initial deposits
 -   XML-based bulk import
 -   Good for initial deposits
 -   Less flexible for updates
@@ -554,16 +538,14 @@ style Parent fill:#fff3e0
 
 # omeka2dsp
 
-# {data-background-image="./images/omeka2dsp_overview.png"}
+#  {data-background-image="./images/omeka2dsp_overview.png"}
 
-# {data-background-image="./images/omeka2dsp_system_architecture.png"}
+#  {data-background-image="./images/omeka2dsp_system_architecture.png"}
 
-# {data-background-image="./images/omeka2dsp_data_workflow.png"}
+#  {data-background-image="./images/omeka2dsp_data_workflow.png"}
 
 ## Lessons Learned
 
-- **Metadata crosswalks and data quality**: Mapping Dublin Core to the DaSCH ontology required custom logic and validation. Omeka’s flexible schema led to inconsistent metadata, demanding extensive cleaning.
-- **Identifiers and file handling**: Synchronizing identifiers between Omeka and DaSCH proved complex. Large files (>100 MB) necessitated chunked uploads and tailored handling.
 -   **Metadata crosswalks and data quality**: Mapping Dublin Core to the DaSCH ontology required custom logic and validation. Omeka’s flexible schema led to inconsistent metadata, demanding extensive cleaning.
 -   **Identifiers and file handling**: Synchronizing identifiers between Omeka and DaSCH proved complex. Large files (\>100 MB) necessitated chunked uploads and tailored handling.
 -   **Workflow timing and validation**: Determining the right moment to shift from active curation to archival mode was key. Early validation with `pydantic` schemas and subset testing prevented costly errors.
@@ -574,11 +556,8 @@ style Parent fill:#fff3e0
 
 ::::: columns
 ::: {.column width="50%"}
-
 ### For the Community
 
-- Lightweight publishing can work with robust infrastructure
-- FAIR principles are achievable in practice
 -   Lightweight publishing can work with robust infrastructure
 -   FAIR principles are achievable in practice
 -   Decoupled architectures provide flexibility
@@ -586,11 +565,8 @@ style Parent fill:#fff3e0
 :::
 
 ::: {.column width="50%"}
-
 ### For DaSCH Users
 
-- Plan metadata transformation early
-- Use validation extensively
 -   Plan metadata transformation early
 -   Use validation extensively
 -   Consider hybrid API/DSP-Tools approach
