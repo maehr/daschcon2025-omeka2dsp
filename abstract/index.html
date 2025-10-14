@@ -1,0 +1,333 @@
+<!DOCTYPE html><html xmlns="http://www.w3.org/1999/xhtml" lang="de" xml:lang="de"><head><meta charset="utf-8"><style>:where(img[jampack-sized]){max-width:100%;height:auto}</style>
+
+
+<meta name="generator" content="quarto-1.8.25">
+
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=yes">
+
+<meta name="author" content="Moritz Mähr">
+<meta name="author" content="Moritz Twente">
+
+<title>A Long-Term Archival Pipeline for the Forschungsdatenplattform Stadt.Geschichte.Basel – DaSCHCon 2025 - omeka2dsp Pipeline</title>
+<style>code{white-space:pre-wrap}span.smallcaps{font-variant:small-caps}div.columns{gap:min(4vw,1.5em);display:flex}div.column{flex:auto;overflow-x:auto}div.hanging-indent{text-indent:-1.5em;margin-left:1.5em}ul.task-list{list-style:none}ul.task-list li input[type=checkbox]{vertical-align:middle;width:.8em;margin:0 .8em .2em -1em}</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../presentation/index.html" rel="next">
+<link href="../index.html" rel="prev">
+<link href="../android-chrome-512x512.png" rel="icon" type="image/png">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-707d8167ce6003fca903bfe2be84ab7f.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-b3b235ae6ba71d6e5c2a90c00144237d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-b3b235ae6ba71d6e5c2a90c00144237d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-b3b235ae6ba71d6e5c2a90c00144237d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": true,
+  "language": {
+    "search-no-results-text": "Keine Treffer",
+    "search-matching-documents-text": "Treffer",
+    "search-copy-link-title": "Link in die Suche kopieren",
+    "search-hide-matches-text": "Zusätzliche Treffer verbergen",
+    "search-more-match-text": "weitere Treffer in diesem Dokument",
+    "search-more-matches-text": "weitere Treffer in diesem Dokument",
+    "search-clear-button-title": "Zurücksetzen",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Abbrechen",
+    "search-submit-button-title": "Abschicken",
+    "search-label": "Suchen"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../styles.css">
+<meta property="og:title" content="A Long-Term Archival Pipeline for the Forschungsdatenplattform Stadt.Geschichte.Basel – DaSCHCon 2025 - omeka2dsp Pipeline">
+<meta property="og:description" content="">
+<meta property="og:image" content="https://maehr.github.io/daschcon2025-omeka2dsp/abstract/data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg==">
+<meta property="og:site_name" content="DaSCHCon 2025 - omeka2dsp Pipeline">
+<meta name="twitter:title" content="A Long-Term Archival Pipeline for the Forschungsdatenplattform Stadt.Geschichte.Basel – DaSCHCon 2025 - omeka2dsp Pipeline">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://maehr.github.io/daschcon2025-omeka2dsp/abstract/data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg==">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://maehr.github.io/daschcon2025-omeka2dsp/abstract/">
+</head>
+
+<body class="floating nav-fixed nav-sidebar quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="fixed-top headroom">
+    <nav class="navbar navbar-expand-lg" data-bs-theme="dark">
+      <div class="container-fluid navbar-container">
+      <div class="mx-auto navbar-brand-container">
+    <a href="../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../android-chrome-512x512.webp" alt="DaSCHCon 2025" class="navbar-logo light-content" fetchpriority="high" decoding="async" width="512" height="512" jampack-sized="true">
+    <img src="../android-chrome-512x512.webp" alt="DaSCHCon 2025" class="navbar-logo dark-content" fetchpriority="high" decoding="async" width="512" height="512" jampack-sized="true">
+    </a>
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">omeka2dsp Pipeline</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Suchen"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Navigation umschalten" onclick="window.quartoToggleHeadroom&&window.quartoToggleHeadroom();
+">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="me-auto navbar-nav navbar-nav-scroll">
+  <li class="nav-item">
+    <a class="nav-link active" href="../index.html" aria-current="page"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../abstract/index.html"> 
+<span class="menu-text">Abstract</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../presentation/index.html"> 
+<span class="menu-text">Presentation</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+    <a href="https://github.com/maehr/daschcon2025-omeka2dsp/" title="" class="px-1 quarto-navigation-tool" aria-label=""><i class="bi bi-github"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="btn quarto-btn-toggle" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Seitenleiste umschalten" onclick="window.quartoToggleHeadroom&&window.quartoToggleHeadroom();
+">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../index.html">DaSCHCon 2025</a></li><li class="breadcrumb-item"><a href="../abstract/index.html">Abstract</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Seitenleiste umschalten" onclick="window.quartoToggleHeadroom&&window.quartoToggleHeadroom();
+">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="page-columns page-layout-article page-navbar page-rows-contents quarto-container">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="collapse collapse-horizontal floating overflow-auto quarto-sidebar-collapse-item sidebar sidebar-navigation">
+    <div class="mt-2 pt-lg-2 sidebar-header text-left">
+      <a href="../index.html" class="sidebar-logo-link">
+      </a>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">DaSCHCon 2025</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Abschnitt umschalten">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse depth1 list-unstyled show sidebar-section">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../abstract/index.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Abstract</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../presentation/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Presentation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../CHANGELOG.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Changelog</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../CITATION.cff" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Citation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../CODE_OF_CONDUCT.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Code of Conduct</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../CONTRIBUTING.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Contributing</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../LICENSE-CCBY.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">License (Data)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../LICENSE-AGPL.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">License (Code)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../SECURITY.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Security</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="margin-sidebar sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Auf dieser Seite</h2>
+   
+  <ul>
+  <li><a href="#abstract" id="toc-abstract" class="nav-link active" data-scroll-target="#abstract">Abstract</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/maehr/daschcon2025-omeka2dsp/edit/main/abstract/index.qmd" class="toc-action"><i class="bi bi-github"></i>Seite editieren</a></li><li><a href="https://github.com/maehr/daschcon2025-omeka2dsp/issues/new/choose" class="toc-action"><i class="bi empty"></i>Problem melden</a></li></ul></div><div class="quarto-other-links"><h2>Weitere Links</h2><ul><li><a href="https://www.dasch.swiss/post/daschcon-2025-cultural-institutions-in-the-digital-age-the-future-of-infrastructures/"><i class="bi bi-house"></i>Veranstaltungswebseite</a></li><li><a href="https://ark.dasch.swiss/ark:/72163/1/0810/UEtpksyaRPeobZ_S41IhnA5.20250827T145742276838562Z"><i class="bi bi-calendar4-range"></i>Konferenzprogramm</a></li><li><a href="https://ark.dasch.swiss/ark:/72163/1/0810/YCULyZnMSImhHrRPqrMZwwh.20250827T145812592171563Z"><i class="bi bi-filetype-pdf"></i>Abstract Booklet</a></li><li><a href="https://dokumentation.stadtgeschichtebasel.ch/omeka2dsp"><i class="bi bi-arrow-up-right-circle"></i>omeka2dsp Pipeline</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="default quarto-title-block"><nav class="quarto-page-breadcrumbs d-lg-block d-none quarto-title-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../index.html">DaSCHCon 2025</a></li><li class="breadcrumb-item"><a href="../abstract/index.html">Abstract</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">A Long-Term Archival Pipeline for the Forschungsdatenplattform Stadt.Geschichte.Basel</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">Vortrag</div>
+  </div>
+  </div>
+
+
+<div class="quarto-title-meta-author">
+  <div class="quarto-title-meta-heading">Autor:innen</div>
+  <div class="quarto-title-meta-heading">Zugehörigkeiten</div>
+  
+    <div class="quarto-title-meta-contents">
+    <p class="author">Moritz Mähr <a href="mailto:moritz.maehr@gmail.com" class="quarto-title-author-email"><i class="bi bi-envelope"></i></a> <a href="https://orcid.org/0000-0002-1367-1618" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg==" alt=""></a></p>
+  </div>
+  <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            Universität Basel
+          </p>
+        <p class="affiliation">
+            Universität Bern
+          </p>
+      </div>
+    <div class="quarto-title-meta-contents">
+    <p class="author">Moritz Twente <a href="mailto:mtwente@protonmail.com" class="quarto-title-author-email"><i class="bi bi-envelope"></i></a> <a href="https://orcid.org/0009-0005-7187-9774" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg==" alt=""></a></p>
+  </div>
+  <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            Universität Basel
+          </p>
+      </div>
+  </div>
+
+<div class="quarto-title-meta">
+
+      
+    <div>
+    <div class="quarto-title-meta-heading">Veröffentlichungsdatum</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">15. Oktober 2025</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="abstract" class="level2">
+<h2 class="anchored" data-anchor-id="abstract">Abstract</h2>
+<p>The <a href="https://forschung.stadtgeschichtebasel.ch">Forschungsdatenplattform</a> by Stadt.Geschichte.Basel provides open access to diverse historical materials relating to the city of Basel, including texts, images, statistical, and geospatial data. While technically robust and publicly available through GitHub Pages using the CollectionBuilder-CSV, our current infrastructure faces critical sustainability and scalability limitations.</p>
+<p>At present, metadata and files are curated and managed using the <a href="https://omeka.unibe.ch/">Omeka-S instance provided by the University of Bern</a>, from which we extract the data for display via CollectionBuilder. However, this setup introduces significant risks for long-term availability:</p>
+<ul>
+<li>Omeka is not under our institutional control and may not remain permanently funded.</li>
+<li>GitHub Pages is not suitable for serving large files or guaranteeing persistence.</li>
+<li>CollectionBuilder lacks built-in support for versioning and persistent identifiers at the level required by research data infrastructures.</li>
+</ul>
+<p>To address these challenges, we are implementing a <a href="https://dokumentation.stadtgeschichtebasel.ch/omeka2dsp">transition pipeline</a> to archive all metadata and associated files with DaSCH, leveraging its infrastructure for versioned, durable, and FAIR-compliant research data publication. The new pipeline includes:</p>
+<ol type="1">
+<li>Metadata harvesting and transformation from Omeka to the DaSCH data model.</li>
+<li>Automated deposit and update routines using the DaSCH REST API, including support for versioning existing records.</li>
+<li>Writing back stable DaSCH identifiers and access URLs to our public-facing platform, ensuring transparency and citability.</li>
+<li>Preservation of hierarchical relationships and media metadata, aligned with our custom metadata model, which incorporates principles of anti-discriminatory description practices.</li>
+</ol>
+<p>This transition allows us to decouple the archival backend from the front-end presentation, ensuring long-term data accessibility, citability, and semantic interoperability. In our presentation, we will share the architectural overview, code-level considerations, and our reflections on working with DaSCH APIs in a real-world context, including:</p>
+<ul>
+<li>Lessons learned in metadata crosswalks and transformation logic.</li>
+<li>Technical caveats in version control, file transfers, and identifier management.</li>
+<li>Challenges in aligning minimal computing approaches (CollectionBuilder) with robust backend infrastructures (DSP).</li>
+</ul>
+<p>This case study illustrates how lightweight digital publishing environments can be effectively combined with national research infrastructures to deliver sustainable, standards-based access to historical research data. It also raises broader questions about infrastructural independence, scalability of humanities platforms, and the practical challenges of implementing FAIR principles in community-developed software ecosystems.</p>
+
+
+</section>
+
+<a onclick="return window.scrollTo(0,0),!1;
+" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Zurück nach oben</a><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Zitat</h2><div><div class="quarto-appendix-secondary-label">Bitte zitieren Sie diese Arbeit als:</div><div id="ref-mähr2025" class="csl-entry quarto-appendix-citeas" role="listitem">
+Mähr, Moritz, and Moritz Twente. 2025. <span>“A Long-Term Archival
+Pipeline for the Forschungsdatenplattform
+Stadt.Geschichte.Basel.”</span> <em>DaSCHCon 2025 – Cultural
+Institutions in the Digital Age: The Future of Infrastructures. Museum
+für Kommunikation, Bern</em>. <a href="https://maehr.github.io/daschcon2025-omeka2dsp/abstract/">https://maehr.github.io/daschcon2025-omeka2dsp/abstract/</a>.
+</div></div></section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">window.document.addEventListener("DOMContentLoaded",function(N){const T="\uE9CB",w=new window.AnchorJS;w.options={placement:"right",icon:T},w.add(".anchored");const M=o=>{for(const t of o.classList)if(t.startsWith("code-annotation-"))return!0;return!1},b=function(o){const t=o.trigger;t.blur(),t.classList.add("code-copy-button-checked");var e=t.getAttribute("title");t.setAttribute("title","Kopiert");let n;window.bootstrap&&(t.setAttribute("data-bs-toggle","tooltip"),t.setAttribute("data-bs-placement","left"),t.setAttribute("data-bs-title","Kopiert"),n=new bootstrap.Tooltip(t,{trigger:"manual",customClass:"code-copy-button-tooltip",offset:[0,-8]}),n.show()),setTimeout(function(){n&&(n.hide(),t.removeAttribute("data-bs-title"),t.removeAttribute("data-bs-toggle"),t.removeAttribute("data-bs-placement")),t.setAttribute("title",e),t.classList.remove("code-copy-button-checked")},1e3),o.clearSelection()},y=function(o){const e=o.parentElement.cloneNode(!0).querySelector("code");for(const n of e.children)M(n)&&n.remove();return e.innerText};new window.ClipboardJS(".code-copy-button:not([data-in-quarto-modal])",{text:y}).on("success",b),window.document.getElementById("quarto-embedded-source-code-modal")&&new window.ClipboardJS(".code-copy-button[data-in-quarto-modal]",{text:y,container:window.document.getElementById("quarto-embedded-source-code-modal")}).on("success",b);for(var q=new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//),I=new RegExp(/^mailto:/),H=new RegExp("https://maehr.github.io/daschcon2025-omeka2dsp/"),k=o=>H.test(o)||q.test(o)||I.test(o),v=window.document.querySelectorAll("a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)"),r=0;r<v.length;r++){const o=v[r];k(o.href)||o.dataset.originalHref!==void 0&&(o.href=o.dataset.originalHref)}function p(o,t,e,n){const i={allowHTML:!0,maxWidth:500,delay:100,arrow:!1,appendTo:function(l){return l.parentElement},interactive:!0,interactiveBorder:10,theme:"quarto",placement:"bottom-start"};t&&(i.content=t),e&&(i.onTrigger=e),n&&(i.onUntrigger=n),window.tippy(o,i)}const E=window.document.querySelectorAll('a[role="doc-noteref"]');for(var r=0;r<E.length;r++){const t=E[r];p(t,function(){let e=t.getAttribute("data-footnote-href")||t.getAttribute("href");try{e=new URL(e).hash}catch{}const n=e.replace(/^#\/?/,""),i=window.document.getElementById(n);return i?i.innerHTML:""})}const A=window.document.querySelectorAll("a.quarto-xref"),g=(o,t)=>{const e=n=>{if(n.classList.remove("page-full","page-columns"),n.children)for(const i of n.children)e(i)};if(e(t),o===null||o.startsWith("sec-")){const n=document.createElement("div");if(t.children&&t.children.length>2){n.appendChild(t.children[0].cloneNode(!0));for(let i=1;i<t.children.length;i++){const l=t.children[i];if(!(l.tagName==="P"&&l.innerText==="")){n.appendChild(l.cloneNode(!0));break}}return window.Quarto?.typesetMath&&window.Quarto.typesetMath(n),n.innerHTML}else return window.Quarto?.typesetMath&&window.Quarto.typesetMath(t),t.innerHTML}else{const n=t.querySelector("a.anchorjs-link");return n&&n.remove(),window.Quarto?.typesetMath&&window.Quarto.typesetMath(t),t.classList.contains("callout")?t.outerHTML:t.innerHTML}};for(var r=0;r<A.length;r++){const t=A[r];p(t,void 0,function(e){e.disable();let n=t.getAttribute("href"),i;if(n.startsWith("#"))i=n;else try{i=new URL(n).hash}catch{}if(i){const l=i.replace(/^#\/?/,""),a=window.document.getElementById(l);if(a!==null)try{const d=g(l,a.cloneNode(!0));e.setContent(d)}finally{e.enable(),e.show()}else fetch(n.split("#")[0]).then(d=>d.text()).then(d=>{const u=new DOMParser().parseFromString(d,"text/html").getElementById(l);if(u!==null){const c=g(l,u);e.setContent(c)}}).finally(()=>{e.enable(),e.show()})}else fetch(n).then(l=>l.text()).then(l=>{const s=new DOMParser().parseFromString(l,"text/html").querySelector("main.content");if(s!==null){s.children.length>0&&s.children[0].tagName==="HEADER"&&s.children[0].remove();const f=g(null,s);e.setContent(f)}}).finally(()=>{e.enable(),e.show()})},function(e){})}let m;const B=(o,t)=>{let e='data-code-cell="'+o+'"',n='data-code-annotation="'+t+'"';return"span["+e+"]["+n+"]"},L=o=>{const t=window.document,e=o.getAttribute("data-target-cell"),n=o.getAttribute("data-target-annotation"),a=window.document.querySelector(B(e,n)).getAttribute("data-code-lines").split(",").map(u=>e+"-"+u);let d=null,s=null,f=null;if(a.length>0){const u=window.document.getElementById(a[0]);if(d=u.offsetTop,s=u.offsetHeight,f=u.parentElement.parentElement,a.length>1){const c=window.document.getElementById(a[a.length-1]);s=c.offsetTop+c.offsetHeight-d}if(d!==null&&s!==null&&f!==null){let c=window.document.getElementById("code-annotation-line-highlight");c===null&&(c=window.document.createElement("div"),c.setAttribute("id","code-annotation-line-highlight"),c.style.position="absolute",f.appendChild(c)),c.style.top=d-2+"px",c.style.height=s+4+"px",c.style.left=0;let h=window.document.getElementById("code-annotation-line-highlight-gutter");h===null&&(h=window.document.createElement("div"),h.setAttribute("id","code-annotation-line-highlight-gutter"),h.style.position="absolute",window.document.getElementById(e).querySelector(".code-annotation-gutter").appendChild(h)),h.style.top=d-2+"px",h.style.height=s+4+"px"}m=o}},x=()=>{["code-annotation-line-highlight","code-annotation-line-highlight-gutter"].forEach(t=>{const e=window.document.getElementById(t);e&&e.remove()}),m=void 0};window.addEventListener("resize",D(()=>{elRect=void 0,m&&L(m)},10));function D(o,t){let e=!1,n;return(...i)=>{e?(n&&clearTimeout(n),n=setTimeout(()=>{o.apply(this,i),n=e=!1},t)):(o.apply(this,i),e=!0)}}const R=window.document.querySelectorAll("dt[data-target-cell]");for(const o of R)o.addEventListener("click",t=>{const e=t.target;if(e!==m){x();const n=window.document.querySelector("dt[data-target-cell].code-annotation-active");n&&n.classList.remove("code-annotation-active"),L(e),e.classList.add("code-annotation-active")}else x(),e.classList.remove("code-annotation-active")});const C=o=>{const t=o.parentElement;if(t){const e=t.dataset.cites;return e?{el:o,cites:e.split(" ")}:C(o.parentElement)}else return};for(var S=window.document.querySelectorAll('a[role="doc-biblioref"]'),r=0;r<S.length;r++){const t=S[r],e=C(t);e&&p(e.el,function(){var n=window.document.createElement("div");return e.cites.forEach(function(i){var l=window.document.createElement("div");l.classList.add("hanging-indent"),l.classList.add("csl-entry");var a=window.document.getElementById("ref-"+i);a&&(l.innerHTML=a.innerHTML),n.appendChild(l)}),n.innerHTML})}});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../index.html" class="pagination-link" aria-label="DaSCHCon 2025">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">DaSCHCon 2025</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../presentation/index.html" class="pagination-link" aria-label="Presentation">
+        <span class="nav-page-text">Presentation</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-md-none d-sm-block"><ul><li><a href="https://github.com/maehr/daschcon2025-omeka2dsp/edit/main/abstract/index.qmd" class="toc-action"><i class="bi bi-github"></i>Seite editieren</a></li><li><a href="https://github.com/maehr/daschcon2025-omeka2dsp/issues/new/choose" class="toc-action"><i class="bi empty"></i>Problem melden</a></li></ul></div></div></div></footer></body></html>

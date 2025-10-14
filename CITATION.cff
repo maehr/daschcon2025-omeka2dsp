@@ -1,0 +1,38 @@
+cff-version: 1.2.0
+title: >-
+  A Long-Term Archival Pipeline for the Forschungsdatenplattform Stadt.Geschichte.Basel
+message: >-
+  If you use this software, please cite it using the metadata from this file.
+type: conference-paper
+authors:
+  - given-names: Moritz
+    family-names: Mähr
+    email: moritz.maehr@gmail.com
+    orcid: 'https://orcid.org/0000-0002-1367-1618'
+    affiliation: Universität Basel
+  - given-names: Moritz
+    family-names: Twente
+    email: mtwente@protonmail.com
+    orcid: 'https://orcid.org/0009-0005-7187-9774'
+    affiliation: Universität Basel
+repository-code: 'https://github.com/maehr/daschcon2025-omeka2dsp'
+abstract: >-
+  The Forschungsdatenplattform by Stadt.Geschichte.Basel provides open access to diverse 
+  historical materials relating to the city of Basel. This presentation discusses the 
+  implementation of a transition pipeline to archive all metadata and associated files 
+  with DaSCH, leveraging its infrastructure for versioned, durable, and FAIR-compliant 
+  research data publication.
+keywords:
+  - DaSCH
+  - Omeka
+  - archival pipeline
+  - research data
+  - FAIR principles
+  - digital humanities
+license: AGPL-3.0
+conference:
+  name: >-
+    DaSCHCon 2025 – Cultural Institutions in the Digital Age: The Future of Infrastructures
+  location: Museum für Kommunikation, Bern
+  date-start: 2025-10-15
+date-released: 2025-10-15
