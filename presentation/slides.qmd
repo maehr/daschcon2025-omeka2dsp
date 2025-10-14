@@ -77,7 +77,13 @@ format:
 
 ## Research Data
 
+::: {layout="[[-1], [1], [-1]]"}
+![](./images/mermaid/ecosystem_1_researchdata.png){fig-align="center"}
+:::
 ```{mermaid}
+%%| echo: false
+%%| eval: false
+%% mermaid configuration for ecosystem_1_researchdata.png
 flowchart LR
   subgraph Research[Research]
     Publications[📚 Publications]
@@ -88,7 +94,15 @@ flowchart LR
 
 ## Collecting and Managing Research Data
 
+::: {layout="[[-1], [1], [-1]]"}
+![](./images/mermaid/ecosystem_2_repositories.png){fig-align="center"}
+:::
+
 ```{mermaid}
+%%| echo: false
+%%| eval: false
+%% mermaid configuration for ecosystem_2_repositories.png
+
 flowchart LR
   subgraph Research[Research]
     Publications[📚 Publications]
@@ -109,102 +123,174 @@ flowchart LR
 
 ## Public History with Research Data
 
+::: {layout="[[-1], [1], [-1]]"}
+![](./images/mermaid/ecosystem_3_FDP.png){fig-align="center"}
+:::
+
 ```{mermaid}
+%%| echo: false
+%%| eval: false
+%% mermaid configuration for ecosystem_3_FDP.png
+---
+config:
+  theme: 'base'
+  themeVariables:
+    primaryColor: '#fff'
+    primaryTextColor: '#3a1e3e'
+    primaryBorderColor: '#3a1e3e'
+    lineColor: '#3a1e3e'
+    secondaryColor: '#ffe880'
+    tertiaryColor: '#fff'
+    edgeLabelBackground: '#fff'
+---
 flowchart LR
-  subgraph Research[Research]
-    Publications[📚 Publications]
-    Data[📊 Statistical & Geo Data]
-    Code[💻 Source Code]
-  end
 
   subgraph Repositories[Repositories]
-    Omeka[(📁 omeka.unibe.ch)]
-    GitHub[(🐙 GitHub)]
+    omeka[(📁 omeka.unibe.ch)]
+    github[(🐙 GitHub)]
   end
 
-  subgraph PublicWeb[Public History Websites]
-    RDP[forschung.stadtgeschichtebasel.ch]
+  subgraph Research[Research]
+    publications[📚 Publications]
+    data[📊 Tabular Data<br>🌎 Geodata]
+    code[💻 Source Code]
   end
 
-  %% Flows
-  Publications -- figures --> Omeka
-  Data -- visualizations --> Omeka
-  Code --> GitHub
-  Omeka -- API --> RDP
-  GitHub -- static site generator --> RDP
+  subgraph PublicHistoryWeb[Public History]
+    rdp[Research Data Platform<br>forschung.stadtgeschichtebasel.ch]
+  end
+
+  publications -->|figures| omeka
+  data -->|visualizations| omeka
+  code -->  github
+
+  omeka -->|API| rdp
+  github -->|static site<br>generator| rdp
+
+
+style Research stroke:#3a1e3e
+style Repositories stroke:#3a1e3e
+style PublicHistoryWeb stroke:#3a1e3e
 ```
 
 ## Archiving Research Data for the Long Run
 
+![](./images/mermaid/ecosystem_4_longtermarchives.png){fig-align="center"}
+
 ```{mermaid}
+%%| echo: false
+%%| eval: false
+%% mermaid configuration for ecosystem_4_longtermarchives.png
+
+---
+config:
+  theme: 'base'
+  themeVariables:
+    primaryColor: '#fff'
+    primaryTextColor: '#3a1e3e'
+    primaryBorderColor: '#3a1e3e'
+    lineColor: '#3a1e3e'
+    secondaryColor: '#ffe880'
+    tertiaryColor: '#fff'
+    edgeLabelBackground: '#fff'
+---
 flowchart LR
-  subgraph Research[Research]
-    Publications[📚 Publications]
-    Data[📊 Statistical & Geo Data]
-    Code[💻 Source Code]
-  end
 
   subgraph Repositories[Repositories]
-    Omeka[(📁 omeka.unibe.ch)]
-    GitHub[(🐙 GitHub)]
+    omeka[(📁 omeka.unibe.ch)]
+    github[(🐙 GitHub)]
   end
 
-  subgraph PublicWeb[Public History Websites]
-    RDP[Research Data Platform<br>forschung.stadtgeschichtebasel.ch]
+  subgraph Research[Research]
+    publications[📚 Publications]
+    data[📊 Tabular Data<br>🌎 Geodata]
+    code[💻 Source Code]
   end
 
-  subgraph Archives[Long-term Archives]
+  subgraph PublicHistoryWeb[Public History]
+    rdp[Research Data Platform<br>forschung.stadtgeschichtebasel.ch]
+  end
+  publications -->|figures| omeka
+  data -->|visualizations| omeka
+  code -->  github
+
+  omeka -->|API| rdp
+  github -->|static site<br>generator| rdp
+  github --> Zenodo
+
+subgraph Archives[Long Term Archives]
+    UBBasel[(📚 Basel<br>University Library)]
     Zenodo[(📦 Zenodo)]
     DaSCH[(🏛️ DaSCH)]
-    UBBasel[(📚 University Library Basel)]
   end
 
-  %% Flows
-  Publications -- books --> UBBasel
-  Publications ~~~ UBBasel
-  Publications -- other publications --> Zenodo
-  Publications -- figures --> Omeka
-  Data -- visualizations --> Omeka
-  Omeka --> DaSCH
-  Omeka -- API --> RDP
-  Code --> GitHub
-  GitHub --> Zenodo
-  GitHub -- Static Site Generator --> RDP
+  publications --->|other<br>publications| Zenodo
+  publications --->|books| UBBasel
+
+  omeka --> DaSCH
+
+
+style Research stroke:#3a1e3e
+style Repositories stroke:#3a1e3e
+style PublicHistoryWeb stroke:#3a1e3e
+style Archives stroke:#3a1e3e
 ```
 
 ## Long-Term Preservation
 
 -   **Institutional sustainability**: External dependencies (Omeka at UniBern) may not be permanently funded
+-   **FAIR principles**: Research data must be Findable, Accessible, Interoperable, and Reusable with proper metadata
+-   **Citability**: Researchers need persistent identifiers (PIDs) (stable URLs or DOIs) to reference historical materials
 -   **Scalability**: Current minimal computing approach (GitHub Pages) cannot handle large files
 
 ## Where DaSCH Fits in: omeka2dsp
+
+::: {layout="[[-1], [1], [-1]]"}
 ![](./images/mermaid/ecosystem_5_dasch.png){fig-align="center"}
+:::
 
 ```{mermaid}
+%%| echo: false
+%%| eval: false
+%% mermaid configuration for ecosystem_5_dasch.png
+---
+config:
+  theme: 'base'
+  themeVariables:
+    primaryColor: '#fff'
+    primaryTextColor: '#3a1e3e'
+    primaryBorderColor: '#3a1e3e'
+    lineColor: '#3a1e3e'
+    secondaryColor: '#ffe880'
+    tertiaryColor: '#fff'
+    edgeLabelBackground: '#fff'
+---
 flowchart LR
+
+  subgraph Repositories[Repositories]
+    omeka[(📁 omeka.unibe.ch)]
+  end
+
   subgraph Research[Research]
-    Publications[📚 Publications]
-    Data[📊 Statistical & Geo Data]
+    publications[📚 Publications]
+    data[📊 Tabular Data<br>🌎 Geodata]
   end
 
-  subgraph Repositories
-    Omeka[(📁 omeka.unibe.ch)]
-  end
-
-  subgraph Archives[Long-term Archives]
+  subgraph Archives[Long Term Archives]
     DaSCH[(🏛️ DaSCH)]
   end
 
-  %% Flows
-  Publications -- figures --> Omeka
-  Data -- visualizations --> Omeka
-  Omeka --> DaSCH
+  publications -->|figures| omeka
+  data -->|visualizations| omeka
+  omeka --> DaSCH
+
+style Research stroke:#3a1e3e
+style Repositories stroke:#3a1e3e
+style Archives stroke:#3a1e3e
 ```
 
 ## Challenges
 
-- Data model differences (Omeka vs DaSCH)
-- Metadata transformation and crosswalks
 -   Data model differences (Omeka vs DaSCH)
 -   Metadata transformation and crosswalks
 -   Automation of deposit and version control
@@ -223,7 +309,26 @@ flowchart LR
 
 ##  Data model Omeka (simplified 😇)
 
+![](./images/mermaid/datamodel_omeka.png){fig-align="center"}
+
 ```{mermaid}
+%%| echo: false
+%%| eval: false
+%% mermaid configuration for datamodel_omeka.png
+---
+config:
+  theme: 'base'
+  themeVariables:
+    primaryColor: '#fff'
+    primaryTextColor: '#3a1e3e'
+    primaryBorderColor: '#3a1e3e'
+    lineColor: '#3a1e3e'
+    secondaryColor: '#ffe880'
+    tertiaryColor: '#fff'
+    edgeLabelBackground: '#fff'
+  class:
+    hideEmptyMembersBox: true
+---
 classDiagram
   %% Core Omeka S entities (reduced)
   class Item {
@@ -274,20 +379,42 @@ classDiagram
   Item "1" o-- "0..*" Media : has media
   Media "*" --> "1" Item : belongs to
   Item "*" o-- "0..*" ItemSet : in set(s)
-  Item --> "0..*" IconclassTerm : subjects
-  Media --> "0..*" IconclassTerm : subjects
   Item --> "1" Era : temporal
   Media --> "1" Era : temporal
   Media --> MIME : media_type
   Media --> LicenseURI : license
   Item --> ISO639 : language
+  Media --> "0..*" IconclassTerm : subjects
+  Item --> "0..*" IconclassTerm : subjects
+
+style Item fill:#ffe880,stroke:#3a1e3e,color:#3a1e3e
+style Media fill:#fff3e0,stroke:#3a1e3e,color:#3a1e3e
 ```
 
 ## Data model DaSCH (simplified 😅)
 
 ::: {layout="[[-1], [1], [-1]]"}
+![](./images/mermaid/datamodel_dasch.png){fig-align="center"}
+:::
 
 ```{mermaid}
+%%| echo: false
+%%| eval: false
+%% mermaid configuration for datamodel_dasch.png
+---
+config:
+  theme: 'base'
+  themeVariables:
+    primaryColor: '#fff'
+    primaryTextColor: '#3a1e3e'
+    primaryBorderColor: '#3a1e3e'
+    lineColor: '#3a1e3e'
+    secondaryColor: '#ffe880'
+    tertiaryColor: '#fff'
+    edgeLabelBackground: '#fff'
+  class:
+    hideEmptyMembersBox: true
+---
 classDiagram
 class Parent
 class Document
@@ -331,6 +458,11 @@ Image "1" --> "0..1" TypeList : hasTypeList
 Image "1" --> "0..1" FormatList : hasFormatList
 Image "1" --> "0..1" LanguageList : hasLanguageList
 Image "1" --> "0..1" LicenseList : hasLicenseList
+
+style Document fill:#ffe880
+style ResourceWithoutMedia fill:#ffe880
+style Image fill:#ffe880
+style Parent fill:#fff3e0
 ```
 
 ## Key differences
