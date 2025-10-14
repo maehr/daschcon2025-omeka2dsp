@@ -64,7 +64,7 @@ format:
     reference-doc: "SGB_PowerPoint_Vorlage.potx"
 ---
 
-## Stadt.Geschichte.Basel
+## ![](./images/book_series_cover.png){fig-align="center"}
 
 -   Large-scale historical research project, initiated in 2011 by the Association for Basel History and carried out 2017–2026 at the University of Basel
 -   More than 70 researchers studying the history of Basel from the earliest settlements to the present day
