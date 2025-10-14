@@ -155,15 +155,16 @@ flowchart LR
   end
 
   %% Flows
-  Publications -- figures --> Omeka
   Publications -- books --> UBBasel
+  Publications ~~~ UBBasel
   Publications -- other publications --> Zenodo
+  Publications -- figures --> Omeka
   Data -- visualizations --> Omeka
+  Omeka --> DaSCH
   Omeka -- API --> RDP
-  GitHub -- Static Site Generator --> RDP
   Code --> GitHub
   GitHub --> Zenodo
-  Omeka --> DaSCH
+  GitHub -- Static Site Generator --> RDP
 ```
 
 ## Long-term preservation
