@@ -9,8 +9,7 @@ This repository contains the abstract and presentation for our contribution to D
 [![GitHub stars](https://img.shields.io/github/stars/maehr/daschcon2025-omeka2dsp.svg)](https://github.com/maehr/daschcon2025-omeka2dsp/stargazers)
 [![Code license](https://img.shields.io/github/license/maehr/daschcon2025-omeka2dsp.svg)](LICENSE-AGPL.md)
 [![Data license](https://img.shields.io/badge/Data-CC_BY_4.0-green)](LICENSE-CCBY.md)
-
-<!-- [![DOI](https://zenodo.org/badge/1070836085.svg)](https://zenodo.org/badge/latestdoi/ZENODO_RECORD) -->
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.17357300.svg)](https://doi.org/10.5281/zenodo.17357300)
 
 ## Conference Information
 

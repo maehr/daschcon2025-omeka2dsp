@@ -13,6 +13,7 @@ author:
     orcid: "0009-0005-7187-9774"
     email: "mtwente@protonmail.com"
 date: "July 14, 2025"
+doi: 10.5281/zenodo.17357300
 abstract: |
   TBD
 other-links:

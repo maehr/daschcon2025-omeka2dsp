@@ -13,6 +13,7 @@ author:
     orcid: "0009-0005-7187-9774"
     email: "mtwente@protonmail.com"
 date: 2025-10-15
+doi: 10.5281/zenodo.17357300
 abstract: |
   The Forschungsdatenplattform by Stadt.Geschichte.Basel provides open access to diverse historical materials relating to the city of Basel, including texts, images, statistical, and geospatial data. While technically robust and publicly available through GitHub Pages using the CollectionBuilder-CSV, our current infrastructure faces critical sustainability and scalability limitations.
 
@@ -73,13 +74,14 @@ format:
 . . .
 
 -   Specialized Team for Research Data Management and Public History
--   Various research outputs   (incl. books, papers, data stories, figures, and source code)
+-   Various research outputs (incl. books, papers, data stories, figures, and source code)
 
 ## Research Data
 
 ::: {layout="[[-1], [1], [-1]]"}
 ![](./images/mermaid/ecosystem_1_researchdata.png){fig-align="center"}
 :::
+
 ```{mermaid}
 %%| echo: false
 %%| eval: false
@@ -576,10 +578,8 @@ style Parent fill:#fff3e0
 
 ## Resources
 
-::::: {layout="[[-1], [1], [-1]]"}
-
-:::: {.columns}
-
+::::::: {layout="[[-1], [1], [-1]]"}
+:::::: columns
 ::: {.column width="33%"}
 ![[Research Data Platform](https://forschung.stadtgeschichtebasel.ch)](./images/research_data_platform.png){fig-align="center"}
 :::
@@ -591,7 +591,5 @@ style Parent fill:#fff3e0
 ::: {.column width="33%"}
 ![[Documentation Platform](https://dokumentation.stadtgeschichtebasel.ch)](./images/documentation_platform.png){fig-align="center"}
 :::
-
-::::
-
-:::::
+::::::
+:::::::

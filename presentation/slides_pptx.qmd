@@ -13,6 +13,7 @@ author:
     orcid: "0009-0005-7187-9774"
     email: "mtwente@protonmail.com"
 date: 2025-10-15
+doi: 10.5281/zenodo.17357300
 abstract: |
   The Forschungsdatenplattform by Stadt.Geschichte.Basel provides open access to diverse historical materials relating to the city of Basel, including texts, images, statistical, and geospatial data. While technically robust and publicly available through GitHub Pages using the CollectionBuilder-CSV, our current infrastructure faces critical sustainability and scalability limitations.
 
