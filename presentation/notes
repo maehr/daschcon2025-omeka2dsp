@@ -1,0 +1,234 @@
+
+## Introduction
+
+-   The [Forschungsdatenplattform Stadt.Geschichte.Basel](https://forschung.stadtgeschichtebasel.ch)
+-   Open access to historical materials (texts, images, statistical, geospatial data)
+-   Current infrastructure: Omeka-S → CollectionBuilder-CSV → GitHub Pages
+-   Problem: Sustainability and scalability challenges
+
+## Current Architecture
+
+```{mermaid}
+graph LR
+    A[Omeka-S<br/>University of Bern] -->|Export| B[CollectionBuilder<br/>CSV]
+    B -->|Deploy| C[GitHub Pages]
+    C -->|Public Access| D[Users]
+```
+
+## Critical Limitations
+
+1.  **Institutional Control**: Omeka not under our control
+2.  **Persistence**: GitHub Pages not suitable for large files
+3.  **FAIR Compliance**: No versioning or persistent identifiers
+4.  **Long-term Funding**: Infrastructure dependencies
+
+## The Solution: omeka2dsp Pipeline
+
+-   Archive with DaSCH infrastructure
+-   Versioned, durable, FAIR-compliant publication
+-   Decoupled archival backend from presentation layer
+
+## New Architecture
+
+```{mermaid}
+graph LR
+    A[Omeka-S] -->|omeka2dsp<br/>Pipeline| B[DaSCH/DSP<br/>Archive]
+    B -->|Stable IDs| C[CollectionBuilder]
+    C -->|Deploy| D[GitHub Pages]
+    B -.->|Long-term<br/>Preservation| E[Users]
+    D -->|Public Access| E
+```
+
+## Pipeline Components
+
+1.  **Metadata Harvesting**: Omeka → DaSCH data model
+2.  **Automated Deposit**: REST API integration with versioning
+3.  **Identifier Management**: Write back stable DaSCH identifiers
+4.  **Relationship Preservation**: Hierarchies and media metadata
+
+## Technical Implementation
+
+### Metadata Transformation
+
+-   Custom crosswalks from Omeka to DaSCH
+-   Anti-discriminatory description practices
+-   Preservation of hierarchical relationships
+
+### API Integration
+
+-   DaSCH REST API for deposits and updates
+-   Version control for existing records
+-   Automated identifier writeback
+
+## Lessons Learned
+
+-   **Metadata Crosswalks**: Complex mapping logic required
+-   **Version Control**: Careful handling of updates and versions
+-   **File Transfers**: Large file handling considerations
+-   **Identifier Management**: Bidirectional synchronization
+
+## Challenges
+
+-   Aligning minimal computing (CollectionBuilder) with robust backends (DSP)
+-   Maintaining infrastructure independence
+-   Scaling humanities platforms
+-   Implementing FAIR principles in practice
+
+## Benefits
+
+-   **Long-term Accessibility**: Institutional backing
+-   **Citability**: Persistent identifiers
+-   **Semantic Interoperability**: Standardized metadata
+-   **Version Control**: Track changes over time
+-   **Decoupling**: Independent presentation and archival layers
+
+## Broader Implications
+
+::::: columns
+::: {.column width="50%"}
+### Questions Raised
+
+-   Infrastructural independence
+-   Platform scalability
+-   FAIR principles in practice
+:::
+
+::: {.column width="50%"}
+### Community Impact
+
+-   Lightweight publishing + robust infrastructure
+-   Standards-based access
+-   Community-developed ecosystems
+:::
+:::::
+
+## Resources
+
+-   [Forschungsdatenplattform](https://forschung.stadtgeschichtebasel.ch)
+-   [omeka2dsp Documentation](https://dokumentation.stadtgeschichtebasel.ch/omeka2dsp)
+-   [Stadt.Geschichte.Basel](https://stadtgeschichtebasel.ch)
+-   [This Repository](https://github.com/maehr/daschcon2025-omeka2dsp)
+
+## Thank You
+
+### Questions?
+
+**Contact:**
+
+-   Moritz Mähr: [moritz.maehr\@gmail.com](mailto:moritz.maehr@gmail.com)
+-   Moritz Twente: [mtwente\@protonmail.com](mailto:mtwente@protonmail.com)
+
+# Präsentation Outline
+
+## 1. SGB project summary
+
+-   Large-scale historical research project, initiated in 2011 by the Association for Basel History and carried out 2017–2026 at the University of Basel
+
+-   More than 70 researchers studying the history of Basel from the earliest settlements to the present day
+
+-   Funded with more than 9 million Swiss francs by the Canton of Basel-Stadt, the Lottery Fund, and private sponsors
+
+-   Specialized team for research data management and public history
+
+-   Outcome: 10 printed volumes and an online portal
+
+------------------------------------------------------------------------
+
+## 2. Research outputs
+
+-   books (10 volumes print and 9 open access)
+-   data stories
+-   data and figures
+-   papers, conference presentations, workshops, panels and manual
+-   code (portal, research data platform, documentation platform, data stories, sgb-figures, open research data template and various scripts)
+
+------------------------------------------------------------------------
+
+## 3. Where does the research output live? \[SLIDE WITH SCREENSHOT FOR EVERY ITEM\]
+
+-   **Omeka S**: catalogue of figures from books and data stories.
+
+-   **Research Data Platform**: the public website built from that catalogue.
+
+-   **Documentation site**: project handbooks and guides.
+
+-   **GitHub**: where code is stored.
+
+-   **DaSCH DSP**: long-term home for Omeka content.
+
+-   **UB Basel e-mono**: long-term home for books.
+
+-   **Zenodo**: long-term home for other outputs (e.g., datasets, talks).
+
+------------------------------------------------------------------------
+
+## 4. Big-picture context
+
+``` mermaid
+flowchart TD
+  subgraph People
+    RDM[RDM Team]
+    OS[Open Science Team UB Basel]
+  end
+
+  subgraph PublicWeb
+    S2[RDP<br/>Public website]
+    S3[Documentation<br/>Project docs]
+  end
+
+  subgraph Catalogue
+    S1[Omeka S<br/>Figures]
+  end
+
+  subgraph Stewardship
+    S5[DaSCH DSP<br/>Long-term for Omeka]
+    S6[e-mono<br/>Long-term for books<br/>DOI]
+    S7[Zenodo<br/>Long-term for other outputs<br/>DOI]
+  end
+
+  subgraph Workspace
+    S4[GitHub<br/>Code]
+  end
+
+  subgraph Automation
+    P1[Nightly Renderer]
+    P2[Manual Exporter]
+  end
+
+  %% People to systems
+  RDM -->|add figures| S1
+  RDM -->|register other outputs| S7
+  RDM -->|write docs| S3
+  RDM -->|writes code| S4
+  OS -->|register books| S6
+
+  %% Automated publishing
+  S1 -->|pull| P1 -->|update| S4 -->|publish| S2
+  S1 -->|export| P2 -->|archive| S5
+
+  %% Relationships
+  S4 -. source for .- S2
+  S4 -. source for .- S3
+```
+
+------------------------------------------------------------------------
+
+## 6. How to long term archive Omeka
+
+-   Walkthrough <https://dokumentation.stadtgeschichtebasel.ch/omeka2dsp/>
+
+## 7. Challenges (Section title slide)
+
+## 8. lessons learned in metadata crosswalks and transformation logic
+
+-   Dublin Core to DaSCH RDF
+
+## 9. Technical caveats in version control, file transfers, and identifier management
+
+-   API vs DSP-Tools
+
+## 10. Challenges in aligning minimal computing approaches (CollectionBuilder) with robust
+
+backend infrastructures (DSP)
+
+-   Timing (When to switch from Omeka to DaSCH?)
