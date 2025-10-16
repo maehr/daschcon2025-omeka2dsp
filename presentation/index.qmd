@@ -22,10 +22,10 @@ other-links:
     href: slides.html
   - text: PDF slides
     icon: file-pdf
-    href: 251015-Mähr_Twente-SGB.pdf.pdf
+    href: 251015-Maehr_Twente-SGB.pdf.pdf
   - text: PowerPoint slides
     icon: file-slides
-    href: 251015-Mähr_Twente-SGB.pdf.pptx
+    href: 251015-Maehr_Twente-SGB.pdf.pptx
 format:
   html: default
 ---
