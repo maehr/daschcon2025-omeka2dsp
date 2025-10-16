@@ -1,8 +1,8 @@
 {
-	"name": "REPO_NAME",
-	"description": "SHORT_DESCRIPTION",
-	"author": "FULLNAME <[INSERT CONTACT METHOD]>",
-	"url": "https://github.com/USERNAME/REPO_NAME/issues",
+	"name": "daschcon2025-omeka2dsp",
+	"description": "A Long-Term Archival Pipeline for the Forschungsdatenplattform Stadt.Geschichte.Basel - DaSCHCon 2025 Presentation",
+	"author": "Moritz Mähr <moritz.maehr@gmail.com>, Moritz Twente <mtwente@protonmail.com>",
+	"url": "https://github.com/maehr/daschcon2025-omeka2dsp/issues",
 	"license": "AGPL-3.0",
 	"scripts": {
 		"check": "prettier --ignore-path .gitignore  --check . '!{CODE_OF_CONDUCT.md,LICENSE-AGPL.md,LICENSE-CCBY.md,_layouts/default.html,package-lock.json,pnpm-lock.yaml,yarn.lock}'",
