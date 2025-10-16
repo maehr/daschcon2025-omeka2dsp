@@ -61,8 +61,6 @@ format:
     preview-links: auto
     auto-stretch: true
     fig-align: center
-  pptx:
-    reference-doc: "SGB_PowerPoint_Vorlage.potx"
 ---
 
 ## ![](./images/book_series_cover.png){fig-align="center"}
