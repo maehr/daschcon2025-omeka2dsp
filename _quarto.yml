@@ -1,18 +1,14 @@
 project:
   type: website
 
-resources:
-  - presentation/251015-Maehr_Twente-SGB.pdf
-  - presentation/251015-Maehr_Twente-SGB.pptx
-
 website:
-  title: DaSCHCon 2025 - omeka2dsp Pipeline
+  title: REPO_NAME
   favicon: android-chrome-512x512.png
   open-graph: true
   twitter-card: true
-  site-url: https://maehr.github.io/daschcon2025-omeka2dsp/
-  repo-url: https://github.com/maehr/daschcon2025-omeka2dsp/
-  issue-url: https://github.com/maehr/daschcon2025-omeka2dsp/issues/new/choose
+  site-url: https://USERNAME.github.io/REPO_NAME/
+  repo-url: https://github.com/USERNAME/REPO_NAME/
+  issue-url: https://github.com/USERNAME/REPO_NAME/issues/new/choose
   repo-actions: [edit, issue]
   page-navigation: true
   bread-crumbs: true
@@ -22,32 +18,24 @@ website:
     type: overlay
   navbar:
     logo: android-chrome-512x512.png
-    logo-alt: 'DaSCHCon 2025'
-    title: omeka2dsp Pipeline
+    logo-alt: ''
+    title: REPO_NAME
     tools:
       - icon: github
-        url: https://github.com/maehr/daschcon2025-omeka2dsp/
+        url: https://github.com/USERNAME/REPO_NAME/
     left:
-      - text: Home
+      - text: Readme
         href: index.qmd
-      - text: Abstract
-        href: abstract/index.qmd
-      - text: Presentation
-        href: presentation/index.qmd
+      - text: Report
+        href: report.md
 
   sidebar:
     contents:
-      - section: DaSCHCon 2025
+      - section: REPO_NAME
         href: index.qmd
         contents:
-          - text: Abstract
-            href: abstract/index.qmd
-          - text: Presentation
-            href: presentation/index.qmd
           - text: Changelog
             href: CHANGELOG.md
-          - text: Citation
-            href: CITATION.cff
           - text: Code of Conduct
             href: CODE_OF_CONDUCT.md
           - text: Contributing
@@ -58,6 +46,8 @@ website:
             href: LICENSE-AGPL.md
           - text: Security
             href: SECURITY.md
+      - href: report.md
+        contents: project-management/*
 
 format:
   html:
@@ -73,7 +63,3 @@ format:
 freeze: true
 
 editor: visual
-
-# Global Mermaid config
-mermaid:
-  theme: neutral

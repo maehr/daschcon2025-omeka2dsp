@@ -1,8 +1,8 @@
 meta:
-  name: daschcon2025-omeka2dsp
+  name: REPO_NAME
   link:
-    home: https://maehr.github.io/daschcon2025-omeka2dsp
-    github: https://github.com/maehr
+    home: https://USERNAME.github.io/REPO_NAME
+    github: https://github.com/USERNAME
   description: |
     SHORT_DESCRIPTION
 

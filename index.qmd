@@ -1,56 +1,8 @@
 ---
-title: DaSCHCon 2025 - omeka2dsp Pipeline
+title: Open Research Data
 format:
   html:
     embed-resources: true
 ---
 
-# A Long-Term Archival Pipeline for the Forschungsdatenplattform Stadt.Geschichte.Basel
-
-This repository contains the abstract and presentation for the DaSCHCon 2025 conference.
-
-## Conference Information
-
--   **Event**: DaSCHCon 2025 – Cultural Institutions in the Digital Age: The Future of Infrastructures
--   **Date**: October 15, 2025
--   **Location**: Museum für Kommunikation, Bern
--   **Website**: [dasch.swiss](https://www.dasch.swiss/post/daschcon-2025-cultural-institutions-in-the-digital-age-the-future-of-infrastructures/)
-
-## Authors
-
--   **Moritz Mähr** - [ORCID: 0000-0002-1367-1618](https://orcid.org/0000-0002-1367-1618) - Universität Basel / Universität Bern
--   **Moritz Twente** - [ORCID: 0009-0005-7187-9774](https://orcid.org/0009-0005-7187-9774) - Universität Basel
-
-## Contents
-
--   [Abstract](abstract/index.qmd) - Full conference abstract
--   [Presentation](presentation/index.qmd) - Quarto RevealJS presentation slides
-
-## Related Links
-
--   [Forschungsdatenplattform Stadt.Geschichte.Basel](https://forschung.stadtgeschichtebasel.ch)
--   [omeka2dsp Documentation](https://dokumentation.stadtgeschichtebasel.ch/omeka2dsp)
--   [Conference Program](https://ark.dasch.swiss/ark:/72163/1/0810/UEtpksyaRPeobZ_S41IhnA5.20250827T145742276838562Z)
--   [Abstract Booklet](https://ark.dasch.swiss/ark:/72163/1/0810/YCULyZnMSImhHrRPqrMZwwh.20250827T145812592171563Z)
-
-## Abstract Summary
-
-The Forschungsdatenplattform by Stadt.Geschichte.Basel provides open access to diverse historical materials relating to the city of Basel. This presentation discusses the implementation of a transition pipeline to archive all metadata and associated files with DaSCH, leveraging its infrastructure for versioned, durable, and FAIR-compliant research data publication.
-
-Our pipeline addresses critical sustainability challenges by:
-
-1.  Harvesting and transforming metadata from Omeka to the DaSCH data model
-2.  Implementing automated deposit and update routines via the DaSCH REST API
-3.  Writing back stable DaSCH identifiers for transparency and citability
-4.  Preserving hierarchical relationships and media metadata
-
-This approach decouples the archival backend from the front-end presentation, ensuring long-term data accessibility while maintaining a lightweight public interface.
-
-## Citation
-
-Please cite as specified in [CITATION.cff](CITATION.cff).
-
-## License
-
--   **Code**: [AGPL-3.0](LICENSE-AGPL.md)
--   **Data**: [CC-BY-4.0](LICENSE-CCBY.md)
+{{< include README.md >}}
