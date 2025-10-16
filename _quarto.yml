@@ -1,6 +1,10 @@
 project:
   type: website
 
+resources:
+  - presentation/251015-Mähr_Twente-SGB.pdf
+  - presentation/251015-Mähr_Twente-SGB.pptx
+
 website:
   title: DaSCHCon 2025 - omeka2dsp Pipeline
   favicon: android-chrome-512x512.png
