@@ -44,7 +44,6 @@ abstract: |
   - Challenges in aligning minimal computing approaches (CollectionBuilder) with robust backend infrastructures (DSP).
 
   This case study illustrates how lightweight digital publishing environments can be effectively combined with national research infrastructures to deliver sustainable, standards-based access to historical research data. It also raises broader questions about infrastructural independence, scalability of humanities platforms, and the practical challenges of implementing FAIR principles in community-developed software ecosystems.
-quarto: false # FIXME uncomment to use 
 format:
   pptx:
     reference-doc: "SGB_PowerPoint_Vorlage.potx"
